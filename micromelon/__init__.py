@@ -1,5 +1,8 @@
 """
-Submodules can be access with either lower-case or upper case notation.
+Python module for connecting to and interacting with the Micromelon Rover
+and simulated rovers in the Micromelon Robot Simulator.
+
+Submodules can be accessed with either lower-case or upper case notation.
 """
 
 from ._robot_comms import RoverController

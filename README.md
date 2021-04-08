@@ -29,24 +29,27 @@ rc.startRover() # Puts in running state
 rc.stopRover() # Returns to idle state
 rc.end() # Disconnects and end Python program
 ```
+Full code examples available in the examples folder.
 
-## Generating Documentation
+## Documentation
+
+### Generating Documentation
 Documentation is generated through the python module pdoc3. 
 Full documentation on pdoc [available here](https://pdoc3.github.io/pdoc/).
 
-### 1. Installing pdoc
+#### 1. Installing pdoc
 Install pdoc through pip.  
 Requires python 3.  
 ```
 pip3 install pdoc3
 ```
 
-### 2. Generating HTML
-```
+#### 2. Generating HTML
+```bash
 pdoc --html --template-dir docs/pdoc_templates -o docs micromelon -f
 ```
 
-### 3. Running docs locally
+#### 3. Running docs locally
 You can run the documentation as a webserver on your local machine with:  
 ```
 pdoc --http : micromelon

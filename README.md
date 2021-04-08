@@ -1,7 +1,7 @@
 ![Micromelon Logo](docs/mm-logo.png)
-# Micromelon Python Module
+# [Micromelon](https://www.micromelon.com.au) Python Module
 
-This module provides an API for connecting and controlling Micromelon Rovers and simulated rovers in the Micromelon Robot Simulator.  
+This module provides an API for connecting and controlling [Micromelon Rovers](https://www.micromelon.com.au/rover.html?) and simulated rovers in the [Micromelon Robot Simulator](https://www.micromelon.com.au/simulator.html).  
 The API is equivalent to what is available in the Micromelon Code Editor application.
 
 ## Installation
@@ -34,7 +34,9 @@ Full code examples available in the examples folder.
 ## Documentation
 
 ### Generating Documentation
-Documentation is generated through the python module pdoc3. 
+Full API documentation available at [https://micromelon-robotics.github.io/mm-pymodule/](https://micromelon-robotics.github.io/mm-pymodule/)  
+
+Documentation is generated through the python module pdoc3.  
 Full documentation on pdoc [available here](https://pdoc3.github.io/pdoc/).
 
 #### 1. Installing pdoc

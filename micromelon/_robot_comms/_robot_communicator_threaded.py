@@ -223,13 +223,13 @@ class RobotCommunicatorThread(threading.Thread):
         return result
 
     def isInBluetoothMode(self):
-        return isinstance(self._connection, RobotTransportBLE)
+        return type(self._connection) == RobotTransportBLE
 
     def isInTcpMode(self):
-        return isinstance(self._connection, RobotTransportTCP)
+        return type(self._connection) == RobotTransportTCP
 
     def isInSerialMode(self):
-        return isinstance(self._connection, RobotTransportSerial)
+        return type(self._connection) == RobotTransportSerial
 
     def queueCommand(self, f, *args, **kwargs):
         command = ThreadCommand(f, *args, **kwargs)

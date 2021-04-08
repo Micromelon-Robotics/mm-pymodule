@@ -57,3 +57,24 @@ You can run the documentation as a webserver on your local machine with:
 pdoc --http : micromelon
 ```
 Then open `http://localhost:8080/` in a browser.
+
+## Building
+
+Get Python build tool
+```
+python -m pip install --upgrade build
+```
+Build package
+```
+python -m build
+```
+
+## Uploading
+Install twine
+```
+python -m pip install --upgrade twine
+```
+Uploading
+```
+python -m twine upload dist/*
+```

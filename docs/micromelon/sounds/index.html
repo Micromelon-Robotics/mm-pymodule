@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>micromelon.sounds API documentation</title>
+<meta name="description" content="Functions to control the onboard buzzer to play tunes or specific frequencies.
+Also helpful definitions for musical notes to their frequency and …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>.homelink img{max-width:20%;max-height:5em;margin:auto;margin-bottom:.3em}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>micromelon.sounds</code></h1>
+</header>
+<section id="section-intro">
+<p>Functions to control the onboard buzzer to play tunes or specific frequencies.<br>
+Also helpful definitions for musical notes to their frequency and aliases for different preprogrammed tunes.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Functions to control the onboard buzzer to play tunes or specific frequencies.
+Also helpful definitions for musical notes to their frequency and aliases for different preprogrammed tunes.
+&#34;&#34;&#34;
+from ._sounds import *
+from ._notes import *
+
+__all__ = [&#34;playNote&#34;, &#34;play&#34;, &#34;off&#34;, &#34;NOTES&#34;, &#34;TUNES&#34;]</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="micromelon.sounds.off"><code class="name flex">
+<span>def <span class="ident">off</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Turns the buzzer off (sets frequency to zero Hz)
+</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def off():
+    &#34;&#34;&#34;
+    Turns the buzzer off (sets frequency to zero Hz)
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    return _rc.writeAttribute(OPTYPE.BUZZER_FREQ, [0])</code></pre>
+</details>
+</dd>
+<dt id="micromelon.sounds.play"><code class="name flex">
+<span>def <span class="ident">play</span></span>(<span>id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Starts playing a preset tune on the robot<br>
+Some preset ids can be found in the TUNES dictionary<br>
+Will return immediately and the tune will play until finished or stopped with another command
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>id</code></strong> :&ensp;<code>number</code> or <code>enum</code></dt>
+<dd>the tune / song to play
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def play(id):
+    &#34;&#34;&#34;
+    Starts playing a preset tune on the robot
+    Some preset ids can be found in the TUNES dictionary
+    Will return immediately and the tune will play until finished or stopped with another command
+
+    Args:
+      id (number or enum): the tune / song to play
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    # Allow use of TUNES enum elements as arguments
+    if isinstance(id, Enum):
+        id = id.value
+    return _rc.writeAttribute(OPTYPE.BUZZER_TUNE, [id])</code></pre>
+</details>
+</dd>
+<dt id="micromelon.sounds.playNote"><code class="name flex">
+<span>def <span class="ident">playNote</span></span>(<span>freq, secs=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the buzzer to the given frequency in Hz<br>
+If secs argument is provided, the function will block until that number of seconds has elapsed
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>freq</code></strong> :&ensp;<code>positive number</code> or <code>enum</code></dt>
+<dd>frequency to play on the buzzer
+</dd>
+<dt><strong><code>secs</code></strong> :&ensp;<code>positive number</code></dt>
+<dd>optional number of seconds to wait after setting the frequency
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception on onvalid arguments
+</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def playNote(freq, secs=None):
+    &#34;&#34;&#34;
+    Sets the buzzer to the given frequency in Hz
+    If secs argument is provided, the function will block until that number of seconds has elapsed
+
+    Args:
+      freq (positive number or enum): frequency to play on the buzzer
+      secs (positive number): optional number of seconds to wait after setting the frequency
+
+    Raises:
+      Exception on onvalid arguments
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    # Allow use of NOTES enum as frequency arguments
+    if isinstance(freq, Enum):
+        freq = freq.value
+
+    if not isNumber(freq) or freq &lt; 0:
+        raise Exception(&#34;Note frequency must be a positive number&#34;)
+
+    if secs:
+        secs = restrictTime(secs)
+
+    # TODO: Is ceil really the right thing to do here?
+    freq = math.ceil(freq)
+    littleEndianFreq = [round(freq) &amp; 0xFF, (round(freq) &gt;&gt; 8) &amp; 0xFF]
+    result = _rc.writeAttribute(OPTYPE.BUZZER_FREQ, littleEndianFreq)
+    if secs:
+        time.sleep(secs)
+    return result</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="micromelon.sounds.NOTES"><code class="flex name class">
+<span>class <span class="ident">NOTES</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of standard musical note frequencies<br>
+As '#' is not valid in a variable name 's' is used instead<br>
+Example: F sharp in the 6th octave would be NOTES.Fs6<br>
+B flat in the 4th octave would be NOTES.Bb4</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.sounds.NOTES.A0"><code class="name">var <span class="ident">A0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A1"><code class="name">var <span class="ident">A1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A2"><code class="name">var <span class="ident">A2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A3"><code class="name">var <span class="ident">A3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A4"><code class="name">var <span class="ident">A4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A5"><code class="name">var <span class="ident">A5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A6"><code class="name">var <span class="ident">A6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A7"><code class="name">var <span class="ident">A7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.A8"><code class="name">var <span class="ident">A8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb0"><code class="name">var <span class="ident">AsBb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb1"><code class="name">var <span class="ident">AsBb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb2"><code class="name">var <span class="ident">AsBb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb3"><code class="name">var <span class="ident">AsBb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb4"><code class="name">var <span class="ident">AsBb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb5"><code class="name">var <span class="ident">AsBb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb6"><code class="name">var <span class="ident">AsBb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb7"><code class="name">var <span class="ident">AsBb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.AsBb8"><code class="name">var <span class="ident">AsBb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B0"><code class="name">var <span class="ident">B0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B1"><code class="name">var <span class="ident">B1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B2"><code class="name">var <span class="ident">B2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B3"><code class="name">var <span class="ident">B3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B4"><code class="name">var <span class="ident">B4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B5"><code class="name">var <span class="ident">B5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B6"><code class="name">var <span class="ident">B6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B7"><code class="name">var <span class="ident">B7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.B8"><code class="name">var <span class="ident">B8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C0"><code class="name">var <span class="ident">C0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C1"><code class="name">var <span class="ident">C1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C2"><code class="name">var <span class="ident">C2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C3"><code class="name">var <span class="ident">C3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C4"><code class="name">var <span class="ident">C4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C5"><code class="name">var <span class="ident">C5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C6"><code class="name">var <span class="ident">C6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C7"><code class="name">var <span class="ident">C7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.C8"><code class="name">var <span class="ident">C8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb0"><code class="name">var <span class="ident">CsDb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb1"><code class="name">var <span class="ident">CsDb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb2"><code class="name">var <span class="ident">CsDb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb3"><code class="name">var <span class="ident">CsDb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb4"><code class="name">var <span class="ident">CsDb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb5"><code class="name">var <span class="ident">CsDb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb6"><code class="name">var <span class="ident">CsDb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb7"><code class="name">var <span class="ident">CsDb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.CsDb8"><code class="name">var <span class="ident">CsDb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D0"><code class="name">var <span class="ident">D0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D1"><code class="name">var <span class="ident">D1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D2"><code class="name">var <span class="ident">D2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D3"><code class="name">var <span class="ident">D3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D4"><code class="name">var <span class="ident">D4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D5"><code class="name">var <span class="ident">D5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D6"><code class="name">var <span class="ident">D6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D7"><code class="name">var <span class="ident">D7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.D8"><code class="name">var <span class="ident">D8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb0"><code class="name">var <span class="ident">DsEb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb1"><code class="name">var <span class="ident">DsEb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb2"><code class="name">var <span class="ident">DsEb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb3"><code class="name">var <span class="ident">DsEb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb4"><code class="name">var <span class="ident">DsEb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb5"><code class="name">var <span class="ident">DsEb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb6"><code class="name">var <span class="ident">DsEb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb7"><code class="name">var <span class="ident">DsEb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.DsEb8"><code class="name">var <span class="ident">DsEb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E0"><code class="name">var <span class="ident">E0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E1"><code class="name">var <span class="ident">E1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E2"><code class="name">var <span class="ident">E2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E3"><code class="name">var <span class="ident">E3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E4"><code class="name">var <span class="ident">E4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E5"><code class="name">var <span class="ident">E5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E6"><code class="name">var <span class="ident">E6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E7"><code class="name">var <span class="ident">E7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.E8"><code class="name">var <span class="ident">E8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F0"><code class="name">var <span class="ident">F0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F1"><code class="name">var <span class="ident">F1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F2"><code class="name">var <span class="ident">F2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F3"><code class="name">var <span class="ident">F3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F4"><code class="name">var <span class="ident">F4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F5"><code class="name">var <span class="ident">F5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F6"><code class="name">var <span class="ident">F6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F7"><code class="name">var <span class="ident">F7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.F8"><code class="name">var <span class="ident">F8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb0"><code class="name">var <span class="ident">FsGb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb1"><code class="name">var <span class="ident">FsGb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb2"><code class="name">var <span class="ident">FsGb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb3"><code class="name">var <span class="ident">FsGb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb4"><code class="name">var <span class="ident">FsGb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb5"><code class="name">var <span class="ident">FsGb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb6"><code class="name">var <span class="ident">FsGb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb7"><code class="name">var <span class="ident">FsGb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.FsGb8"><code class="name">var <span class="ident">FsGb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G0"><code class="name">var <span class="ident">G0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G1"><code class="name">var <span class="ident">G1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G2"><code class="name">var <span class="ident">G2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G3"><code class="name">var <span class="ident">G3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G4"><code class="name">var <span class="ident">G4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G5"><code class="name">var <span class="ident">G5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G6"><code class="name">var <span class="ident">G6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G7"><code class="name">var <span class="ident">G7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.G8"><code class="name">var <span class="ident">G8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb0"><code class="name">var <span class="ident">GsAb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb1"><code class="name">var <span class="ident">GsAb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb2"><code class="name">var <span class="ident">GsAb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb3"><code class="name">var <span class="ident">GsAb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb4"><code class="name">var <span class="ident">GsAb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb5"><code class="name">var <span class="ident">GsAb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb6"><code class="name">var <span class="ident">GsAb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb7"><code class="name">var <span class="ident">GsAb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.NOTES.GsAb8"><code class="name">var <span class="ident">GsAb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="micromelon.sounds.TUNES"><code class="flex name class">
+<span>class <span class="ident">TUNES</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of pre-programmed tunes the robot can play
+</p>
+<p>TUNES.UP = 1<br>
+TUNES.DOWN = 2</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TUNES(Enum):
+    &#34;&#34;&#34;
+    A collection of pre-programmed tunes the robot can play
+
+    TUNES.UP = 1
+    TUNES.DOWN = 2
+    &#34;&#34;&#34;
+
+    UP = 1
+    DOWN = 2</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.sounds.TUNES.DOWN"><code class="name">var <span class="ident">DOWN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.sounds.TUNES.UP"><code class="name">var <span class="ident">UP</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<img src="../mm-logo.png" alt="Micromelon Logo">
+</header>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="micromelon" href="../index.html">micromelon</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="micromelon.sounds.off" href="#micromelon.sounds.off">off</a></code></li>
+<li><code><a title="micromelon.sounds.play" href="#micromelon.sounds.play">play</a></code></li>
+<li><code><a title="micromelon.sounds.playNote" href="#micromelon.sounds.playNote">playNote</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="micromelon.sounds.NOTES" href="#micromelon.sounds.NOTES">NOTES</a></code></h4>
+<ul class="two-column">
+<li><code><a title="micromelon.sounds.NOTES.A0" href="#micromelon.sounds.NOTES.A0">A0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A1" href="#micromelon.sounds.NOTES.A1">A1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A2" href="#micromelon.sounds.NOTES.A2">A2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A3" href="#micromelon.sounds.NOTES.A3">A3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A4" href="#micromelon.sounds.NOTES.A4">A4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A5" href="#micromelon.sounds.NOTES.A5">A5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A6" href="#micromelon.sounds.NOTES.A6">A6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A7" href="#micromelon.sounds.NOTES.A7">A7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.A8" href="#micromelon.sounds.NOTES.A8">A8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb0" href="#micromelon.sounds.NOTES.AsBb0">AsBb0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb1" href="#micromelon.sounds.NOTES.AsBb1">AsBb1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb2" href="#micromelon.sounds.NOTES.AsBb2">AsBb2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb3" href="#micromelon.sounds.NOTES.AsBb3">AsBb3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb4" href="#micromelon.sounds.NOTES.AsBb4">AsBb4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb5" href="#micromelon.sounds.NOTES.AsBb5">AsBb5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb6" href="#micromelon.sounds.NOTES.AsBb6">AsBb6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb7" href="#micromelon.sounds.NOTES.AsBb7">AsBb7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.AsBb8" href="#micromelon.sounds.NOTES.AsBb8">AsBb8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B0" href="#micromelon.sounds.NOTES.B0">B0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B1" href="#micromelon.sounds.NOTES.B1">B1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B2" href="#micromelon.sounds.NOTES.B2">B2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B3" href="#micromelon.sounds.NOTES.B3">B3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B4" href="#micromelon.sounds.NOTES.B4">B4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B5" href="#micromelon.sounds.NOTES.B5">B5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B6" href="#micromelon.sounds.NOTES.B6">B6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B7" href="#micromelon.sounds.NOTES.B7">B7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.B8" href="#micromelon.sounds.NOTES.B8">B8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C0" href="#micromelon.sounds.NOTES.C0">C0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C1" href="#micromelon.sounds.NOTES.C1">C1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C2" href="#micromelon.sounds.NOTES.C2">C2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C3" href="#micromelon.sounds.NOTES.C3">C3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C4" href="#micromelon.sounds.NOTES.C4">C4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C5" href="#micromelon.sounds.NOTES.C5">C5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C6" href="#micromelon.sounds.NOTES.C6">C6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C7" href="#micromelon.sounds.NOTES.C7">C7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.C8" href="#micromelon.sounds.NOTES.C8">C8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb0" href="#micromelon.sounds.NOTES.CsDb0">CsDb0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb1" href="#micromelon.sounds.NOTES.CsDb1">CsDb1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb2" href="#micromelon.sounds.NOTES.CsDb2">CsDb2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb3" href="#micromelon.sounds.NOTES.CsDb3">CsDb3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb4" href="#micromelon.sounds.NOTES.CsDb4">CsDb4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb5" href="#micromelon.sounds.NOTES.CsDb5">CsDb5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb6" href="#micromelon.sounds.NOTES.CsDb6">CsDb6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb7" href="#micromelon.sounds.NOTES.CsDb7">CsDb7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.CsDb8" href="#micromelon.sounds.NOTES.CsDb8">CsDb8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D0" href="#micromelon.sounds.NOTES.D0">D0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D1" href="#micromelon.sounds.NOTES.D1">D1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D2" href="#micromelon.sounds.NOTES.D2">D2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D3" href="#micromelon.sounds.NOTES.D3">D3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D4" href="#micromelon.sounds.NOTES.D4">D4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D5" href="#micromelon.sounds.NOTES.D5">D5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D6" href="#micromelon.sounds.NOTES.D6">D6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D7" href="#micromelon.sounds.NOTES.D7">D7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.D8" href="#micromelon.sounds.NOTES.D8">D8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb0" href="#micromelon.sounds.NOTES.DsEb0">DsEb0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb1" href="#micromelon.sounds.NOTES.DsEb1">DsEb1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb2" href="#micromelon.sounds.NOTES.DsEb2">DsEb2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb3" href="#micromelon.sounds.NOTES.DsEb3">DsEb3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb4" href="#micromelon.sounds.NOTES.DsEb4">DsEb4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb5" href="#micromelon.sounds.NOTES.DsEb5">DsEb5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb6" href="#micromelon.sounds.NOTES.DsEb6">DsEb6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb7" href="#micromelon.sounds.NOTES.DsEb7">DsEb7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.DsEb8" href="#micromelon.sounds.NOTES.DsEb8">DsEb8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E0" href="#micromelon.sounds.NOTES.E0">E0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E1" href="#micromelon.sounds.NOTES.E1">E1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E2" href="#micromelon.sounds.NOTES.E2">E2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E3" href="#micromelon.sounds.NOTES.E3">E3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E4" href="#micromelon.sounds.NOTES.E4">E4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E5" href="#micromelon.sounds.NOTES.E5">E5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E6" href="#micromelon.sounds.NOTES.E6">E6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E7" href="#micromelon.sounds.NOTES.E7">E7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.E8" href="#micromelon.sounds.NOTES.E8">E8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F0" href="#micromelon.sounds.NOTES.F0">F0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F1" href="#micromelon.sounds.NOTES.F1">F1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F2" href="#micromelon.sounds.NOTES.F2">F2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F3" href="#micromelon.sounds.NOTES.F3">F3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F4" href="#micromelon.sounds.NOTES.F4">F4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F5" href="#micromelon.sounds.NOTES.F5">F5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F6" href="#micromelon.sounds.NOTES.F6">F6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F7" href="#micromelon.sounds.NOTES.F7">F7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.F8" href="#micromelon.sounds.NOTES.F8">F8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb0" href="#micromelon.sounds.NOTES.FsGb0">FsGb0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb1" href="#micromelon.sounds.NOTES.FsGb1">FsGb1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb2" href="#micromelon.sounds.NOTES.FsGb2">FsGb2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb3" href="#micromelon.sounds.NOTES.FsGb3">FsGb3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb4" href="#micromelon.sounds.NOTES.FsGb4">FsGb4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb5" href="#micromelon.sounds.NOTES.FsGb5">FsGb5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb6" href="#micromelon.sounds.NOTES.FsGb6">FsGb6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb7" href="#micromelon.sounds.NOTES.FsGb7">FsGb7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.FsGb8" href="#micromelon.sounds.NOTES.FsGb8">FsGb8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G0" href="#micromelon.sounds.NOTES.G0">G0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G1" href="#micromelon.sounds.NOTES.G1">G1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G2" href="#micromelon.sounds.NOTES.G2">G2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G3" href="#micromelon.sounds.NOTES.G3">G3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G4" href="#micromelon.sounds.NOTES.G4">G4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G5" href="#micromelon.sounds.NOTES.G5">G5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G6" href="#micromelon.sounds.NOTES.G6">G6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G7" href="#micromelon.sounds.NOTES.G7">G7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.G8" href="#micromelon.sounds.NOTES.G8">G8</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb0" href="#micromelon.sounds.NOTES.GsAb0">GsAb0</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb1" href="#micromelon.sounds.NOTES.GsAb1">GsAb1</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb2" href="#micromelon.sounds.NOTES.GsAb2">GsAb2</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb3" href="#micromelon.sounds.NOTES.GsAb3">GsAb3</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb4" href="#micromelon.sounds.NOTES.GsAb4">GsAb4</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb5" href="#micromelon.sounds.NOTES.GsAb5">GsAb5</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb6" href="#micromelon.sounds.NOTES.GsAb6">GsAb6</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb7" href="#micromelon.sounds.NOTES.GsAb7">GsAb7</a></code></li>
+<li><code><a title="micromelon.sounds.NOTES.GsAb8" href="#micromelon.sounds.NOTES.GsAb8">GsAb8</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="micromelon.sounds.TUNES" href="#micromelon.sounds.TUNES">TUNES</a></code></h4>
+<ul class="">
+<li><code><a title="micromelon.sounds.TUNES.DOWN" href="#micromelon.sounds.TUNES.DOWN">DOWN</a></code></li>
+<li><code><a title="micromelon.sounds.TUNES.UP" href="#micromelon.sounds.TUNES.UP">UP</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

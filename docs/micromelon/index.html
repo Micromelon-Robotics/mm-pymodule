@@ -1,0 +1,1910 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>micromelon API documentation</title>
+<meta name="description" content="Submodules can be access with either lower-case or upper case notation." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>.homelink img{max-width:20%;max-height:5em;margin:auto;margin-bottom:.3em}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>micromelon</code></h1>
+</header>
+<section id="section-intro">
+<p>Submodules can be access with either lower-case or upper case notation.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Submodules can be access with either lower-case or upper case notation.
+&#34;&#34;&#34;
+
+from ._robot_comms import RoverController
+from . import battery as Battery
+from . import colour as Colour
+from . import i2c as I2C
+from . import imu as IMU
+from . import ir as IR
+from . import leds as LEDs
+from . import motors as Motors
+from . import robot as Robot
+from . import servos as Servos
+from . import sounds as Sounds
+from . import ultrasonic as Ultrasonic
+from .helper_math import _math as Math
+from ._utils import delay
+
+CS = Colour.CS
+NOTES = Sounds.NOTES
+TUNES = Sounds.TUNES
+
+__all__ = [
+    &#34;RoverController&#34;,
+    &#34;Motors&#34;,
+    &#34;Ultrasonic&#34;,
+    &#34;IMU&#34;,
+    &#34;IR&#34;,
+    &#34;Battery&#34;,
+    &#34;Math&#34;,
+    &#34;Robot&#34;,
+    &#34;Sounds&#34;,
+    &#34;NOTES&#34;,
+    &#34;TUNES&#34;,
+    &#34;LEDs&#34;,
+    &#34;Colour&#34;,
+    &#34;CS&#34;,
+    &#34;Servos&#34;,
+    &#34;I2C&#34;,
+    &#34;delay&#34;,
+]</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="micromelon.battery" href="battery/index.html">micromelon.battery</a></code></dt>
+<dd>
+<div class="desc"><p>Functions to read the state of the robot's internal battery</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.colour" href="colour/index.html">micromelon.colour</a></code></dt>
+<dd>
+<div class="desc"><p>Collection of functions for manipulating colour representations.<br>
+Includes functions for reading from the robot's colour sensors.</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.helper_math" href="helper_math/index.html">micromelon.helper_math</a></code></dt>
+<dd>
+<div class="desc"><p>Collection of helpful maths functions and aliases</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.i2c" href="i2c/index.html">micromelon.i2c</a></code></dt>
+<dd>
+<div class="desc"><p>Functions for communicating with I2C devices connected to the expansion header<br>
+If the rover controller is in uart operation then these functions are …</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.imu" href="imu/index.html">micromelon.imu</a></code></dt>
+<dd>
+<div class="desc"><p>Collection of functions to read information from the robot's Inertial Measurement Unit (IMU)
+<br>
+The robot's IMU has an accelerometer and gyroscope</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.ir" href="ir/index.html">micromelon.ir</a></code></dt>
+<dd>
+<div class="desc"><p>Functions for reading from the robot's IR time of flight distance sensors.<br>
+These sensors read the distance in cm to the nearest object on each side of …</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.leds" href="leds/index.html">micromelon.leds</a></code></dt>
+<dd>
+<div class="desc"><p>Functions for controlling the RGB LEDs on the corners of the robot<br>
+Top and bottom LEDs are coupled so you can only control 4<br>
+Bottom LEDs mirror …</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.motors" href="motors/index.html">micromelon.motors</a></code></dt>
+<dd>
+<div class="desc"><p>Collection of functions to control the movement of the robot</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.robot" href="robot/index.html">micromelon.robot</a></code></dt>
+<dd>
+<div class="desc"><p>Collection of functions to set and get robot attributes and use the onboard screen …</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.servos" href="servos/index.html">micromelon.servos</a></code></dt>
+<dd>
+<div class="desc"><p>Collection of functions for controlling servo motors connected to<br>
+the three pin headers on the back of the robot.</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.sounds" href="sounds/index.html">micromelon.sounds</a></code></dt>
+<dd>
+<div class="desc"><p>Functions to control the onboard buzzer to play tunes or specific frequencies.<br>
+Also helpful definitions for musical notes to their frequency and …</p></div>
+</dd>
+<dt><code class="name"><a title="micromelon.ultrasonic" href="ultrasonic/index.html">micromelon.ultrasonic</a></code></dt>
+<dd>
+<div class="desc"><p>Functions to read from the robot's ultrasonic sensor.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="micromelon.delay"><code class="name flex">
+<span>def <span class="ident">delay</span></span>(<span>seconds) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Alias to Python time.sleep(seconds)
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>seconds</code></strong> :&ensp;<code>number</code></dt>
+<dd>see Python time.sleep documentation
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delay(seconds) -&gt; None:
+    &#34;&#34;&#34;
+    Alias to Python time.sleep(seconds)
+
+    Args:
+        seconds (number): see Python time.sleep documentation
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    sleep(seconds)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="micromelon.CS"><code class="flex name class">
+<span>class <span class="ident">CS</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of attributes that can be read from the colour sensor<br>
+Values correspond to attribute position in the sensor read array
+</p>
+<p>CS.HUE = 0<br>
+CS.RED = 1<br>
+CS.GREEN = 2<br>
+CS.BLUE = 3<br>
+CS.BRIGHT = 4<br>
+CS.ALL = 5</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CS(Enum):
+    &#34;&#34;&#34;
+    A collection of attributes that can be read from the colour sensor
+    Values correspond to attribute position in the sensor read array
+
+    CS.HUE = 0
+    CS.RED = 1
+    CS.GREEN = 2
+    CS.BLUE = 3
+    CS.BRIGHT = 4
+    CS.ALL = 5
+    &#34;&#34;&#34;
+
+    HUE = 0
+    RED = 1
+    GREEN = 2
+    BLUE = 3
+    BRIGHT = 4
+    ALL = 5</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.CS.ALL"><code class="name">var <span class="ident">ALL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.CS.BLUE"><code class="name">var <span class="ident">BLUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.CS.BRIGHT"><code class="name">var <span class="ident">BRIGHT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.CS.GREEN"><code class="name">var <span class="ident">GREEN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.CS.HUE"><code class="name">var <span class="ident">HUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.CS.RED"><code class="name">var <span class="ident">RED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="micromelon.NOTES"><code class="flex name class">
+<span>class <span class="ident">NOTES</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of standard musical note frequencies<br>
+As '#' is not valid in a variable name 's' is used instead<br>
+Example: F sharp in the 6th octave would be NOTES.Fs6<br>
+B flat in the 4th octave would be NOTES.Bb4</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.NOTES.A0"><code class="name">var <span class="ident">A0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A1"><code class="name">var <span class="ident">A1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A2"><code class="name">var <span class="ident">A2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A3"><code class="name">var <span class="ident">A3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A4"><code class="name">var <span class="ident">A4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A5"><code class="name">var <span class="ident">A5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A6"><code class="name">var <span class="ident">A6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A7"><code class="name">var <span class="ident">A7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.A8"><code class="name">var <span class="ident">A8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb0"><code class="name">var <span class="ident">AsBb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb1"><code class="name">var <span class="ident">AsBb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb2"><code class="name">var <span class="ident">AsBb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb3"><code class="name">var <span class="ident">AsBb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb4"><code class="name">var <span class="ident">AsBb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb5"><code class="name">var <span class="ident">AsBb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb6"><code class="name">var <span class="ident">AsBb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb7"><code class="name">var <span class="ident">AsBb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.AsBb8"><code class="name">var <span class="ident">AsBb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B0"><code class="name">var <span class="ident">B0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B1"><code class="name">var <span class="ident">B1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B2"><code class="name">var <span class="ident">B2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B3"><code class="name">var <span class="ident">B3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B4"><code class="name">var <span class="ident">B4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B5"><code class="name">var <span class="ident">B5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B6"><code class="name">var <span class="ident">B6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B7"><code class="name">var <span class="ident">B7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.B8"><code class="name">var <span class="ident">B8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C0"><code class="name">var <span class="ident">C0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C1"><code class="name">var <span class="ident">C1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C2"><code class="name">var <span class="ident">C2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C3"><code class="name">var <span class="ident">C3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C4"><code class="name">var <span class="ident">C4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C5"><code class="name">var <span class="ident">C5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C6"><code class="name">var <span class="ident">C6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C7"><code class="name">var <span class="ident">C7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.C8"><code class="name">var <span class="ident">C8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb0"><code class="name">var <span class="ident">CsDb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb1"><code class="name">var <span class="ident">CsDb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb2"><code class="name">var <span class="ident">CsDb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb3"><code class="name">var <span class="ident">CsDb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb4"><code class="name">var <span class="ident">CsDb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb5"><code class="name">var <span class="ident">CsDb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb6"><code class="name">var <span class="ident">CsDb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb7"><code class="name">var <span class="ident">CsDb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.CsDb8"><code class="name">var <span class="ident">CsDb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D0"><code class="name">var <span class="ident">D0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D1"><code class="name">var <span class="ident">D1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D2"><code class="name">var <span class="ident">D2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D3"><code class="name">var <span class="ident">D3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D4"><code class="name">var <span class="ident">D4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D5"><code class="name">var <span class="ident">D5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D6"><code class="name">var <span class="ident">D6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D7"><code class="name">var <span class="ident">D7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.D8"><code class="name">var <span class="ident">D8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb0"><code class="name">var <span class="ident">DsEb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb1"><code class="name">var <span class="ident">DsEb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb2"><code class="name">var <span class="ident">DsEb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb3"><code class="name">var <span class="ident">DsEb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb4"><code class="name">var <span class="ident">DsEb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb5"><code class="name">var <span class="ident">DsEb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb6"><code class="name">var <span class="ident">DsEb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb7"><code class="name">var <span class="ident">DsEb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.DsEb8"><code class="name">var <span class="ident">DsEb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E0"><code class="name">var <span class="ident">E0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E1"><code class="name">var <span class="ident">E1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E2"><code class="name">var <span class="ident">E2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E3"><code class="name">var <span class="ident">E3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E4"><code class="name">var <span class="ident">E4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E5"><code class="name">var <span class="ident">E5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E6"><code class="name">var <span class="ident">E6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E7"><code class="name">var <span class="ident">E7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.E8"><code class="name">var <span class="ident">E8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F0"><code class="name">var <span class="ident">F0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F1"><code class="name">var <span class="ident">F1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F2"><code class="name">var <span class="ident">F2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F3"><code class="name">var <span class="ident">F3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F4"><code class="name">var <span class="ident">F4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F5"><code class="name">var <span class="ident">F5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F6"><code class="name">var <span class="ident">F6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F7"><code class="name">var <span class="ident">F7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.F8"><code class="name">var <span class="ident">F8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb0"><code class="name">var <span class="ident">FsGb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb1"><code class="name">var <span class="ident">FsGb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb2"><code class="name">var <span class="ident">FsGb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb3"><code class="name">var <span class="ident">FsGb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb4"><code class="name">var <span class="ident">FsGb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb5"><code class="name">var <span class="ident">FsGb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb6"><code class="name">var <span class="ident">FsGb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb7"><code class="name">var <span class="ident">FsGb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.FsGb8"><code class="name">var <span class="ident">FsGb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G0"><code class="name">var <span class="ident">G0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G1"><code class="name">var <span class="ident">G1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G2"><code class="name">var <span class="ident">G2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G3"><code class="name">var <span class="ident">G3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G4"><code class="name">var <span class="ident">G4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G5"><code class="name">var <span class="ident">G5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G6"><code class="name">var <span class="ident">G6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G7"><code class="name">var <span class="ident">G7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.G8"><code class="name">var <span class="ident">G8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb0"><code class="name">var <span class="ident">GsAb0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb1"><code class="name">var <span class="ident">GsAb1</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb2"><code class="name">var <span class="ident">GsAb2</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb3"><code class="name">var <span class="ident">GsAb3</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb4"><code class="name">var <span class="ident">GsAb4</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb5"><code class="name">var <span class="ident">GsAb5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb6"><code class="name">var <span class="ident">GsAb6</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb7"><code class="name">var <span class="ident">GsAb7</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.NOTES.GsAb8"><code class="name">var <span class="ident">GsAb8</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="micromelon.RoverController"><code class="flex name class">
+<span>class <span class="ident">RoverController</span></span>
+<span>(</span><span>defaultTimeout=3.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Manages connection and packet level communication with the robot<br>
+Is a singleton - get a reference to the instance with constructor
+</p>
+<p>standard usage<br>
+rc = RoverController()
+</p>
+<p>Then connect using one of the three methods below<br>
+rc.connectSerial('COM port name')<br>
+rc.connectIP(address, port)<br>
+rc.connectBLE(botID)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RoverController(metaclass=Singleton):
+    &#34;&#34;&#34;
+    Manages connection and packet level communication with the robot
+    Is a singleton - get a reference to the instance with constructor
+
+    standard usage
+    rc = RoverController()
+
+    Then connect using one of the three methods below
+    rc.connectSerial(&#39;COM port name&#39;)
+    rc.connectIP(address, port)
+    rc.connectBLE(botID)
+    &#34;&#34;&#34;
+
+    def __init__(self, defaultTimeout=3.0) -&gt; None:
+        signal.signal(signal.SIGINT, _sigint_handler)
+        self._roverSimInfo = 0
+        self._roverCharge = None
+        self._roverErrorMask = None
+        self._defaultCommunicationTimeout = defaultTimeout
+        self._robotCommunicator = RobotCommunicatorThread()
+        self._robotCommunicator.start()
+
+    def setDefaultCommunicationTimeout(self, newDefaultTimeout: float) -&gt; None:
+        &#34;&#34;&#34;
+        This default timeout (in seconds) is used as a fallback for any communication
+        that happens with the robot.
+        Can be overridden for individual function calls.
+        Set a longer timeout if you expect slow communcation.
+
+        Args:
+          newDefaultTimeout (float): time in seconds to timeout on a communication command
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        self._defaultCommunicationTimeout = newDefaultTimeout
+
+    def isConnected(self) -&gt; bool:
+        return self._robotCommunicator.isConnected()
+
+    def connectedRobotIsSimulated(self) -&gt; bool:
+        return self.isConnected() and self._roverSimInfo != 0
+
+    def startRover(self, overrideSensorSpamMode: bool = None) -&gt; None:
+        &#34;&#34;&#34;
+        Start sequence depending on robot mode:
+          Serial UART: Set rover to Expansion mode to respond to packets from UART on header
+          Serial TCP: Write the running state for program start
+          Bluetooth: Write the running state for program start and start sensor spam iff not overridden to False
+
+        Args:
+          overrideSensorSpamMode (bool):
+            - Defaults to None
+            - Sensor Spam mode will be activated by default for a Bluetooth connection to improve sensor read speeds
+            - It is not activated by default for serial and TCP connections
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        if (
+            self._robotCommunicator.isInBluetoothMode()
+            and overrideSensorSpamMode is None
+        ) or overrideSensorSpamMode:
+            self._robotCommunicator.startSensorSpam()
+        if not self._robotCommunicator.isInSerialMode():
+            self.writeAttribute(OPTYPE.BUTTON_PRESS, [RUNNING_STATES.RUNNING.value])
+
+    def _postConnectionSetup(self) -&gt; None:
+        &#34;&#34;&#34;
+        Check whether the connected robot is simulated
+        Read battery percentage and sensor error mask
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        self._roverSimInfo = None
+        self._roverCharge = None
+        self._roverErrorMask = None
+        try:
+            self._roverSimInfo = self.readAttribute(OPTYPE.SIMULATOR_INFO)[0]
+            print(&#34;Rover siminfo: &#34; + str(self._roverSimInfo))
+        except Exception as e:
+            # couldn&#39;t read simulator info - assume not simulated
+            print(&#34;Rover siminfo read failed&#34;)
+            print(e)
+            self._roverSimInfo = 0
+
+        try:
+            self._roverCharge = self.readAttribute(OPTYPE.STATE_OF_CHARGE)[0]
+            print(&#34;Rover battery at &#34; + str(self._roverCharge) + &#34;%&#34;)
+            self._roverErrorMask = bytesToIntArray(
+                self.readAttribute(OPTYPE.SENSOR_ERRORS), 2, False
+            )[0]
+            if self._roverErrorMask == 0:
+                print(&#34;No sensor errors detected&#34;)
+            else:
+                print(&#34;Sensor errors detected&#34;)
+                print(&#34;Error mask: &#34; + str(self._roverErrorMask))
+        except Exception as e:
+            print(&#34;Failed to read battery and error mask&#34;)
+            print(e)
+
+    def connectSerial(self, port=&#34;/dev/ttyS0&#34;):
+        &#34;&#34;&#34;
+        Connects to the desired port and attempts to set the rover to UART mode
+        The default port is the miniUART on a Raspberry Pi (primary UART on Zero W, 3, and 4)
+          Other Raspberry Pi models have &#34;/dev/ttyAMA0&#34; as primary UART
+          Note: You will need to disable serial console on the UART you choose to use for it to function correctly
+
+        Args:
+          port (string): Name of serial COM port
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        self._robotCommunicator.connectSerial(port)
+        self.setRoverToUART(True)
+        self._postConnectionSetup()
+
+    def connectIP(self, address=&#34;127.0.0.1&#34;, port=9000):
+        &#34;&#34;&#34;
+        Connects over TCP to the address and port provided.
+        To connect to a simulated robot choose the port to match the BotID shown in the robot
+          controls on the top left of the simulator window.
+
+        Args:
+          address (string): IP address - defaults to IPv4 loopback (127.0.0.1)
+          port (int): TCP port number - defaults to 9000
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        self._robotCommunicator.connectIP(address, port)
+        self._postConnectionSetup()
+
+    def connectBLE(self, botID):
+        &#34;&#34;&#34;
+        Connects over Bluetooth LE to a robot displaying the given ID on its screen.
+
+        Args:
+          botID (int): Robot ID number (shown on robot screen)
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        self._robotCommunicator.connectBLE(botID)
+        self._postConnectionSetup()
+
+    def disconnect(self) -&gt; None:
+        self._robotCommunicator.disconnect()
+
+    def getTransmitAverageMS(self) -&gt; int:
+        &#34;&#34;&#34;
+        Returns:
+          The approximate (moving average) time in ms it takes to transmit a packet to the robot.
+        &#34;&#34;&#34;
+        stats = self._robotCommunicator.getCommsTimingStats()
+        return stats[0]
+
+    def getTransactionAverageMS(self) -&gt; int:
+        &#34;&#34;&#34;
+        Returns:
+          The approximate (moving average) time in ms it takes to complete a transaction with the robot.
+          A transaction is an attribute write or non-cached attribute read
+        &#34;&#34;&#34;
+        stats = self._robotCommunicator.getCommsTimingStats()
+        return stats[2]
+
+    def stopRover(self):
+        &#34;&#34;&#34;
+        Attempts to stop the rover by setting motor speeds to 0, turning off the buzzer,
+        turning sensor spam off, and taking it out of running mode.
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        waitForAck = False
+        timeout = 0.5
+        try:
+            self.writePacket(OPCODE.WRITE, OPTYPE.SPAM_MODE, [0], waitForAck, timeout)
+            self.writePacket(
+                OPCODE.WRITE, OPTYPE.MOTOR_SET, [0] * 7, waitForAck, timeout
+            )
+            self.writePacket(
+                OPCODE.WRITE, OPTYPE.BUZZER_FREQ, [0, 0], waitForAck, timeout
+            )
+            if not self._robotCommunicator.isInSerialMode():
+                self.writePacket(
+                    OPCODE.WRITE,
+                    OPTYPE.BUTTON_PRESS,
+                    [RUNNING_STATES.CLOSED.value],
+                    waitForAck,
+                    timeout,
+                )
+        except Exception as e:
+            print(&#34;Not all robot stop commands completed&#34;)
+            print(e)
+
+    def end(self):
+        &#34;&#34;&#34;
+        Stops all communication threads and ends the entire Python program.
+        &#34;&#34;&#34;
+        self._robotCommunicator.stop()
+        self._robotCommunicator.join()
+        try:
+            sys.exit(0)
+        except Exception:
+            # Sometimes threading module has a shutdown exception
+            # TODO: investigate further
+            os._exit(0)
+
+    def writeAttribute(self, opType, data, timeout=None):
+        &#34;&#34;&#34;
+        Blocking Write - writes an attribute and returns once the ACK packet is received from the robot.
+
+        Args:
+          opType (int or MicromelonOpType): Attribute to write to.
+          data (list of bytes): data to write.
+          timeout (number): time in seconds to wait for completion.
+                          Uses the default timeout of this controller if not provided
+
+        Raises:
+          TimeoutError on timeout.
+          Exception on comms failure.
+
+        Returns:
+          True on success, False otherwise.
+        &#34;&#34;&#34;
+        if timeout is None:
+            timeout = self._defaultCommunicationTimeout
+        return self._robotCommunicator.writeAttribute(opType, data, timeout)
+
+    def readAttribute(self, opType, data=None, timeout=None):
+        &#34;&#34;&#34;
+        Blocking read - returns the raw data from robot response
+
+        Args:
+          opType (int or MicromelonOpType): Attribute to write to.
+          data (list of bytes): extra read configuration data.
+          timeout (number): time in seconds to wait for result.
+                          Uses the default timeout of this controller if not provided
+
+        Raises:
+          TimeoutError on timeout.
+          Exception on comms failure.
+
+        Returns:
+          List of bytes on success, None otherwise.
+        &#34;&#34;&#34;
+        if data is None:
+            data = []
+        if timeout is None:
+            timeout = self._defaultCommunicationTimeout
+        return self._robotCommunicator.readAttribute(opType, data, timeout)
+
+    def writePacket(self, opCode, opType, data=None, waitForAck=True, timeout=None):
+        &#34;&#34;&#34;
+        Blocking write - Writes the packet over transport.
+        Waits for ack by default.
+
+        Args:
+          opCode (int or MicromelonOpCode): Flag for type of operation.
+          opType (int or MicromelonOpType): Attribute to write to.
+          data (list of bytes): data for packet, defaults to None.
+          waitForAck (bool): whether or not to wait for the robot to acknowledge the packet. Defaults to true.
+          timeout (number): time in seconds to wait for result. Defaults to None (block indefinitely).
+                          Uses the default timeout of this controller if not provided
+
+        Raises:
+          TimeoutError on timeout.
+          Exception on comms failure.
+
+        Returns:
+          True on success, False otherwise.
+        &#34;&#34;&#34;
+        if data is None:
+            data = []
+        if timeout is None:
+            timeout = self._defaultCommunicationTimeout
+        return self._robotCommunicator.writePacket(
+            opCode, opType, data, waitForAck, timeout
+        )
+
+    def doMotorOperation(self, opType, data, timeout=120):
+        &#34;&#34;&#34;
+        Some motor operations that use encoders or IMU take an unknown amount of time to complete.
+        In this case the robot acknowledges receipt of the command and then notifies completion at
+        a later time.
+        This function writes the motor command and waits for the completion notification.
+        Only use this if you&#39;re sure you want to.
+
+        Args:
+          opType (int or MicromelonOpType): Attribute to write to.
+          data (list of bytes): data for packet, defaults to None.
+          timeout (number): time in seconds to wait for result. Defaults to 120.
+                            If your operation should take more than 2 minutes maybe the approach isn&#39;t ideal.
+
+        Raises:
+          TimeoutError on timeout.
+          Exception on comms failure.
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        self._robotCommunicator.clearMotorNotificationWatchers()
+        toWait = self._robotCommunicator.getNewMotorNotificationWatcherEvent()
+        self.writeAttribute(opType, data)
+        timedOut = not toWait.wait(timeout)
+        if timedOut:
+            raise TimeoutError(&#34;Motor Encoder operation timed out&#34;)
+
+    def setRoverToUART(self, uartMode: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the robot&#39;s UART control mode.
+        If set to True, the robot will respond to packets over the UART connection
+        on the expansion header and will not be available for Bluetooth connections.
+        If set to false, the robot will be in normal Bluetooth operation mode
+
+        Args:
+          uartMode (bool): Whether or not to be in UART mode.
+
+        Raises:
+          TimeoutError on timeout.
+          Exception on comms failure.
+
+        Returns:
+          None
+        &#34;&#34;&#34;
+        data = [0]
+        if uartMode:
+            data = [1]
+        self.writePacket(OPCODE.WRITE, OPTYPE.CONTROL_MODE, data)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="micromelon.RoverController.connectBLE"><code class="name flex">
+<span>def <span class="ident">connectBLE</span></span>(<span>self, botID)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Connects over Bluetooth LE to a robot displaying the given ID on its screen.
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>botID</code></strong> :&ensp;<code>int</code></dt>
+<dd>Robot ID number (shown on robot screen)
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connectBLE(self, botID):
+    &#34;&#34;&#34;
+    Connects over Bluetooth LE to a robot displaying the given ID on its screen.
+
+    Args:
+      botID (int): Robot ID number (shown on robot screen)
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    self._robotCommunicator.connectBLE(botID)
+    self._postConnectionSetup()</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.connectIP"><code class="name flex">
+<span>def <span class="ident">connectIP</span></span>(<span>self, address='127.0.0.1', port=9000)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Connects over TCP to the address and port provided.<br>
+To connect to a simulated robot choose the port to match the BotID shown in the robot<br>
+controls on the top left of the simulator window.
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>address</code></strong> :&ensp;<code>string</code></dt>
+<dd>IP address - defaults to IPv4 loopback (127.0.0.1)
+</dd>
+<dt><strong><code>port</code></strong> :&ensp;<code>int</code></dt>
+<dd>TCP port number - defaults to 9000
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connectIP(self, address=&#34;127.0.0.1&#34;, port=9000):
+    &#34;&#34;&#34;
+    Connects over TCP to the address and port provided.
+    To connect to a simulated robot choose the port to match the BotID shown in the robot
+      controls on the top left of the simulator window.
+
+    Args:
+      address (string): IP address - defaults to IPv4 loopback (127.0.0.1)
+      port (int): TCP port number - defaults to 9000
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    self._robotCommunicator.connectIP(address, port)
+    self._postConnectionSetup()</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.connectSerial"><code class="name flex">
+<span>def <span class="ident">connectSerial</span></span>(<span>self, port='/dev/ttyS0')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Connects to the desired port and attempts to set the rover to UART mode<br>
+The default port is the miniUART on a Raspberry Pi (primary UART on Zero W, 3, and 4)<br>
+Other Raspberry Pi models have "/dev/ttyAMA0" as primary UART<br>
+Note: You will need to disable serial console on the UART you choose to use for it to function correctly
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>port</code></strong> :&ensp;<code>string</code></dt>
+<dd>Name of serial COM port
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connectSerial(self, port=&#34;/dev/ttyS0&#34;):
+    &#34;&#34;&#34;
+    Connects to the desired port and attempts to set the rover to UART mode
+    The default port is the miniUART on a Raspberry Pi (primary UART on Zero W, 3, and 4)
+      Other Raspberry Pi models have &#34;/dev/ttyAMA0&#34; as primary UART
+      Note: You will need to disable serial console on the UART you choose to use for it to function correctly
+
+    Args:
+      port (string): Name of serial COM port
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    self._robotCommunicator.connectSerial(port)
+    self.setRoverToUART(True)
+    self._postConnectionSetup()</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.connectedRobotIsSimulated"><code class="name flex">
+<span>def <span class="ident">connectedRobotIsSimulated</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connectedRobotIsSimulated(self) -&gt; bool:
+    return self.isConnected() and self._roverSimInfo != 0</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.disconnect"><code class="name flex">
+<span>def <span class="ident">disconnect</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def disconnect(self) -&gt; None:
+    self._robotCommunicator.disconnect()</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.doMotorOperation"><code class="name flex">
+<span>def <span class="ident">doMotorOperation</span></span>(<span>self, opType, data, timeout=120)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Some motor operations that use encoders or IMU take an unknown amount of time to complete.<br>
+In this case the robot acknowledges receipt of the command and then notifies completion at<br>
+a later time.<br>
+This function writes the motor command and waits for the completion notification.<br>
+Only use this if you're sure you want to.
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>opType</code></strong> :&ensp;<code>int</code> or <code>MicromelonOpType</code></dt>
+<dd>Attribute to write to.
+</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>list</code> of <code>bytes</code></dt>
+<dd>data for packet, defaults to None.
+</dd>
+<dt><strong><code>timeout</code></strong> :&ensp;<code>number</code></dt>
+<dd>time in seconds to wait for result. Defaults to 120.<br>
+If your operation should take more than 2 minutes maybe the approach isn't ideal.
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>TimeoutError on timeout.<br>
+Exception on comms failure.
+</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def doMotorOperation(self, opType, data, timeout=120):
+    &#34;&#34;&#34;
+    Some motor operations that use encoders or IMU take an unknown amount of time to complete.
+    In this case the robot acknowledges receipt of the command and then notifies completion at
+    a later time.
+    This function writes the motor command and waits for the completion notification.
+    Only use this if you&#39;re sure you want to.
+
+    Args:
+      opType (int or MicromelonOpType): Attribute to write to.
+      data (list of bytes): data for packet, defaults to None.
+      timeout (number): time in seconds to wait for result. Defaults to 120.
+                        If your operation should take more than 2 minutes maybe the approach isn&#39;t ideal.
+
+    Raises:
+      TimeoutError on timeout.
+      Exception on comms failure.
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    self._robotCommunicator.clearMotorNotificationWatchers()
+    toWait = self._robotCommunicator.getNewMotorNotificationWatcherEvent()
+    self.writeAttribute(opType, data)
+    timedOut = not toWait.wait(timeout)
+    if timedOut:
+        raise TimeoutError(&#34;Motor Encoder operation timed out&#34;)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.end"><code class="name flex">
+<span>def <span class="ident">end</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Stops all communication threads and ends the entire Python program.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def end(self):
+    &#34;&#34;&#34;
+    Stops all communication threads and ends the entire Python program.
+    &#34;&#34;&#34;
+    self._robotCommunicator.stop()
+    self._robotCommunicator.join()
+    try:
+        sys.exit(0)
+    except Exception:
+        # Sometimes threading module has a shutdown exception
+        # TODO: investigate further
+        os._exit(0)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.getTransactionAverageMS"><code class="name flex">
+<span>def <span class="ident">getTransactionAverageMS</span></span>(<span>self) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="returns">Returns</h2>
+<p>The approximate (moving average) time in ms it takes to complete a transaction with the robot.<br>
+A transaction is an attribute write or non-cached attribute read</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getTransactionAverageMS(self) -&gt; int:
+    &#34;&#34;&#34;
+    Returns:
+      The approximate (moving average) time in ms it takes to complete a transaction with the robot.
+      A transaction is an attribute write or non-cached attribute read
+    &#34;&#34;&#34;
+    stats = self._robotCommunicator.getCommsTimingStats()
+    return stats[2]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.getTransmitAverageMS"><code class="name flex">
+<span>def <span class="ident">getTransmitAverageMS</span></span>(<span>self) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="returns">Returns</h2>
+<p>The approximate (moving average) time in ms it takes to transmit a packet to the robot.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getTransmitAverageMS(self) -&gt; int:
+    &#34;&#34;&#34;
+    Returns:
+      The approximate (moving average) time in ms it takes to transmit a packet to the robot.
+    &#34;&#34;&#34;
+    stats = self._robotCommunicator.getCommsTimingStats()
+    return stats[0]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.isConnected"><code class="name flex">
+<span>def <span class="ident">isConnected</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def isConnected(self) -&gt; bool:
+    return self._robotCommunicator.isConnected()</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.readAttribute"><code class="name flex">
+<span>def <span class="ident">readAttribute</span></span>(<span>self, opType, data=None, timeout=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Blocking read - returns the raw data from robot response
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>opType</code></strong> :&ensp;<code>int</code> or <code>MicromelonOpType</code></dt>
+<dd>Attribute to write to.
+</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>list</code> of <code>bytes</code></dt>
+<dd>extra read configuration data.
+</dd>
+<dt><strong><code>timeout</code></strong> :&ensp;<code>number</code></dt>
+<dd>time in seconds to wait for result.<br>
+Uses the default timeout of this controller if not provided
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>TimeoutError on timeout.<br>
+Exception on comms failure.
+</p>
+<h2 id="returns">Returns</h2>
+<p>List of bytes on success, None otherwise.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def readAttribute(self, opType, data=None, timeout=None):
+    &#34;&#34;&#34;
+    Blocking read - returns the raw data from robot response
+
+    Args:
+      opType (int or MicromelonOpType): Attribute to write to.
+      data (list of bytes): extra read configuration data.
+      timeout (number): time in seconds to wait for result.
+                      Uses the default timeout of this controller if not provided
+
+    Raises:
+      TimeoutError on timeout.
+      Exception on comms failure.
+
+    Returns:
+      List of bytes on success, None otherwise.
+    &#34;&#34;&#34;
+    if data is None:
+        data = []
+    if timeout is None:
+        timeout = self._defaultCommunicationTimeout
+    return self._robotCommunicator.readAttribute(opType, data, timeout)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.setDefaultCommunicationTimeout"><code class="name flex">
+<span>def <span class="ident">setDefaultCommunicationTimeout</span></span>(<span>self, newDefaultTimeout: float) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This default timeout (in seconds) is used as a fallback for any communication<br>
+that happens with the robot.<br>
+Can be overridden for individual function calls.<br>
+Set a longer timeout if you expect slow communcation.
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>newDefaultTimeout</code></strong> :&ensp;<code>float</code></dt>
+<dd>time in seconds to timeout on a communication command
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setDefaultCommunicationTimeout(self, newDefaultTimeout: float) -&gt; None:
+    &#34;&#34;&#34;
+    This default timeout (in seconds) is used as a fallback for any communication
+    that happens with the robot.
+    Can be overridden for individual function calls.
+    Set a longer timeout if you expect slow communcation.
+
+    Args:
+      newDefaultTimeout (float): time in seconds to timeout on a communication command
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    self._defaultCommunicationTimeout = newDefaultTimeout</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.setRoverToUART"><code class="name flex">
+<span>def <span class="ident">setRoverToUART</span></span>(<span>self, uartMode: bool) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the robot's UART control mode.<br>
+If set to True, the robot will respond to packets over the UART connection<br>
+on the expansion header and will not be available for Bluetooth connections.<br>
+If set to false, the robot will be in normal Bluetooth operation mode
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>uartMode</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether or not to be in UART mode.
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>TimeoutError on timeout.<br>
+Exception on comms failure.
+</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setRoverToUART(self, uartMode: bool) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the robot&#39;s UART control mode.
+    If set to True, the robot will respond to packets over the UART connection
+    on the expansion header and will not be available for Bluetooth connections.
+    If set to false, the robot will be in normal Bluetooth operation mode
+
+    Args:
+      uartMode (bool): Whether or not to be in UART mode.
+
+    Raises:
+      TimeoutError on timeout.
+      Exception on comms failure.
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    data = [0]
+    if uartMode:
+        data = [1]
+    self.writePacket(OPCODE.WRITE, OPTYPE.CONTROL_MODE, data)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.startRover"><code class="name flex">
+<span>def <span class="ident">startRover</span></span>(<span>self, overrideSensorSpamMode: bool = None) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Start sequence depending on robot mode:
+Serial UART: Set rover to Expansion mode to respond to packets from UART on header<br>
+Serial TCP: Write the running state for program start<br>
+Bluetooth: Write the running state for program start and start sensor spam iff not overridden to False
+</p>
+<h2 id="args">Args</h2>
+<p>overrideSensorSpamMode (bool):
+- Defaults to None<br>
+- Sensor Spam mode will be activated by default for a Bluetooth connection to improve sensor read speeds<br>
+- It is not activated by default for serial and TCP connections
+</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def startRover(self, overrideSensorSpamMode: bool = None) -&gt; None:
+    &#34;&#34;&#34;
+    Start sequence depending on robot mode:
+      Serial UART: Set rover to Expansion mode to respond to packets from UART on header
+      Serial TCP: Write the running state for program start
+      Bluetooth: Write the running state for program start and start sensor spam iff not overridden to False
+
+    Args:
+      overrideSensorSpamMode (bool):
+        - Defaults to None
+        - Sensor Spam mode will be activated by default for a Bluetooth connection to improve sensor read speeds
+        - It is not activated by default for serial and TCP connections
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    if (
+        self._robotCommunicator.isInBluetoothMode()
+        and overrideSensorSpamMode is None
+    ) or overrideSensorSpamMode:
+        self._robotCommunicator.startSensorSpam()
+    if not self._robotCommunicator.isInSerialMode():
+        self.writeAttribute(OPTYPE.BUTTON_PRESS, [RUNNING_STATES.RUNNING.value])</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.stopRover"><code class="name flex">
+<span>def <span class="ident">stopRover</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Attempts to stop the rover by setting motor speeds to 0, turning off the buzzer,<br>
+turning sensor spam off, and taking it out of running mode.
+</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def stopRover(self):
+    &#34;&#34;&#34;
+    Attempts to stop the rover by setting motor speeds to 0, turning off the buzzer,
+    turning sensor spam off, and taking it out of running mode.
+
+    Returns:
+      None
+    &#34;&#34;&#34;
+    waitForAck = False
+    timeout = 0.5
+    try:
+        self.writePacket(OPCODE.WRITE, OPTYPE.SPAM_MODE, [0], waitForAck, timeout)
+        self.writePacket(
+            OPCODE.WRITE, OPTYPE.MOTOR_SET, [0] * 7, waitForAck, timeout
+        )
+        self.writePacket(
+            OPCODE.WRITE, OPTYPE.BUZZER_FREQ, [0, 0], waitForAck, timeout
+        )
+        if not self._robotCommunicator.isInSerialMode():
+            self.writePacket(
+                OPCODE.WRITE,
+                OPTYPE.BUTTON_PRESS,
+                [RUNNING_STATES.CLOSED.value],
+                waitForAck,
+                timeout,
+            )
+    except Exception as e:
+        print(&#34;Not all robot stop commands completed&#34;)
+        print(e)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.writeAttribute"><code class="name flex">
+<span>def <span class="ident">writeAttribute</span></span>(<span>self, opType, data, timeout=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Blocking Write - writes an attribute and returns once the ACK packet is received from the robot.
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>opType</code></strong> :&ensp;<code>int</code> or <code>MicromelonOpType</code></dt>
+<dd>Attribute to write to.
+</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>list</code> of <code>bytes</code></dt>
+<dd>data to write.
+</dd>
+<dt><strong><code>timeout</code></strong> :&ensp;<code>number</code></dt>
+<dd>time in seconds to wait for completion.<br>
+Uses the default timeout of this controller if not provided
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>TimeoutError on timeout.<br>
+Exception on comms failure.
+</p>
+<h2 id="returns">Returns</h2>
+<p>True on success, False otherwise.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def writeAttribute(self, opType, data, timeout=None):
+    &#34;&#34;&#34;
+    Blocking Write - writes an attribute and returns once the ACK packet is received from the robot.
+
+    Args:
+      opType (int or MicromelonOpType): Attribute to write to.
+      data (list of bytes): data to write.
+      timeout (number): time in seconds to wait for completion.
+                      Uses the default timeout of this controller if not provided
+
+    Raises:
+      TimeoutError on timeout.
+      Exception on comms failure.
+
+    Returns:
+      True on success, False otherwise.
+    &#34;&#34;&#34;
+    if timeout is None:
+        timeout = self._defaultCommunicationTimeout
+    return self._robotCommunicator.writeAttribute(opType, data, timeout)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.RoverController.writePacket"><code class="name flex">
+<span>def <span class="ident">writePacket</span></span>(<span>self, opCode, opType, data=None, waitForAck=True, timeout=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Blocking write - Writes the packet over transport.<br>
+Waits for ack by default.
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>opCode</code></strong> :&ensp;<code>int</code> or <code>MicromelonOpCode</code></dt>
+<dd>Flag for type of operation.
+</dd>
+<dt><strong><code>opType</code></strong> :&ensp;<code>int</code> or <code>MicromelonOpType</code></dt>
+<dd>Attribute to write to.
+</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>list</code> of <code>bytes</code></dt>
+<dd>data for packet, defaults to None.
+</dd>
+<dt><strong><code>waitForAck</code></strong> :&ensp;<code>bool</code></dt>
+<dd>whether or not to wait for the robot to acknowledge the packet. Defaults to true.
+</dd>
+<dt><strong><code>timeout</code></strong> :&ensp;<code>number</code></dt>
+<dd>time in seconds to wait for result. Defaults to None (block indefinitely).<br>
+Uses the default timeout of this controller if not provided
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>TimeoutError on timeout.<br>
+Exception on comms failure.
+</p>
+<h2 id="returns">Returns</h2>
+<p>True on success, False otherwise.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def writePacket(self, opCode, opType, data=None, waitForAck=True, timeout=None):
+    &#34;&#34;&#34;
+    Blocking write - Writes the packet over transport.
+    Waits for ack by default.
+
+    Args:
+      opCode (int or MicromelonOpCode): Flag for type of operation.
+      opType (int or MicromelonOpType): Attribute to write to.
+      data (list of bytes): data for packet, defaults to None.
+      waitForAck (bool): whether or not to wait for the robot to acknowledge the packet. Defaults to true.
+      timeout (number): time in seconds to wait for result. Defaults to None (block indefinitely).
+                      Uses the default timeout of this controller if not provided
+
+    Raises:
+      TimeoutError on timeout.
+      Exception on comms failure.
+
+    Returns:
+      True on success, False otherwise.
+    &#34;&#34;&#34;
+    if data is None:
+        data = []
+    if timeout is None:
+        timeout = self._defaultCommunicationTimeout
+    return self._robotCommunicator.writePacket(
+        opCode, opType, data, waitForAck, timeout
+    )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="micromelon.TUNES"><code class="flex name class">
+<span>class <span class="ident">TUNES</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of pre-programmed tunes the robot can play
+</p>
+<p>TUNES.UP = 1<br>
+TUNES.DOWN = 2</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TUNES(Enum):
+    &#34;&#34;&#34;
+    A collection of pre-programmed tunes the robot can play
+
+    TUNES.UP = 1
+    TUNES.DOWN = 2
+    &#34;&#34;&#34;
+
+    UP = 1
+    DOWN = 2</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.TUNES.DOWN"><code class="name">var <span class="ident">DOWN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.TUNES.UP"><code class="name">var <span class="ident">UP</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<img src="../mm-logo.png" alt="Micromelon Logo">
+</header>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="micromelon.battery" href="battery/index.html">micromelon.battery</a></code></li>
+<li><code><a title="micromelon.colour" href="colour/index.html">micromelon.colour</a></code></li>
+<li><code><a title="micromelon.helper_math" href="helper_math/index.html">micromelon.helper_math</a></code></li>
+<li><code><a title="micromelon.i2c" href="i2c/index.html">micromelon.i2c</a></code></li>
+<li><code><a title="micromelon.imu" href="imu/index.html">micromelon.imu</a></code></li>
+<li><code><a title="micromelon.ir" href="ir/index.html">micromelon.ir</a></code></li>
+<li><code><a title="micromelon.leds" href="leds/index.html">micromelon.leds</a></code></li>
+<li><code><a title="micromelon.motors" href="motors/index.html">micromelon.motors</a></code></li>
+<li><code><a title="micromelon.robot" href="robot/index.html">micromelon.robot</a></code></li>
+<li><code><a title="micromelon.servos" href="servos/index.html">micromelon.servos</a></code></li>
+<li><code><a title="micromelon.sounds" href="sounds/index.html">micromelon.sounds</a></code></li>
+<li><code><a title="micromelon.ultrasonic" href="ultrasonic/index.html">micromelon.ultrasonic</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="micromelon.delay" href="#micromelon.delay">delay</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="micromelon.CS" href="#micromelon.CS">CS</a></code></h4>
+<ul class="two-column">
+<li><code><a title="micromelon.CS.ALL" href="#micromelon.CS.ALL">ALL</a></code></li>
+<li><code><a title="micromelon.CS.BLUE" href="#micromelon.CS.BLUE">BLUE</a></code></li>
+<li><code><a title="micromelon.CS.BRIGHT" href="#micromelon.CS.BRIGHT">BRIGHT</a></code></li>
+<li><code><a title="micromelon.CS.GREEN" href="#micromelon.CS.GREEN">GREEN</a></code></li>
+<li><code><a title="micromelon.CS.HUE" href="#micromelon.CS.HUE">HUE</a></code></li>
+<li><code><a title="micromelon.CS.RED" href="#micromelon.CS.RED">RED</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="micromelon.NOTES" href="#micromelon.NOTES">NOTES</a></code></h4>
+<ul class="two-column">
+<li><code><a title="micromelon.NOTES.A0" href="#micromelon.NOTES.A0">A0</a></code></li>
+<li><code><a title="micromelon.NOTES.A1" href="#micromelon.NOTES.A1">A1</a></code></li>
+<li><code><a title="micromelon.NOTES.A2" href="#micromelon.NOTES.A2">A2</a></code></li>
+<li><code><a title="micromelon.NOTES.A3" href="#micromelon.NOTES.A3">A3</a></code></li>
+<li><code><a title="micromelon.NOTES.A4" href="#micromelon.NOTES.A4">A4</a></code></li>
+<li><code><a title="micromelon.NOTES.A5" href="#micromelon.NOTES.A5">A5</a></code></li>
+<li><code><a title="micromelon.NOTES.A6" href="#micromelon.NOTES.A6">A6</a></code></li>
+<li><code><a title="micromelon.NOTES.A7" href="#micromelon.NOTES.A7">A7</a></code></li>
+<li><code><a title="micromelon.NOTES.A8" href="#micromelon.NOTES.A8">A8</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb0" href="#micromelon.NOTES.AsBb0">AsBb0</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb1" href="#micromelon.NOTES.AsBb1">AsBb1</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb2" href="#micromelon.NOTES.AsBb2">AsBb2</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb3" href="#micromelon.NOTES.AsBb3">AsBb3</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb4" href="#micromelon.NOTES.AsBb4">AsBb4</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb5" href="#micromelon.NOTES.AsBb5">AsBb5</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb6" href="#micromelon.NOTES.AsBb6">AsBb6</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb7" href="#micromelon.NOTES.AsBb7">AsBb7</a></code></li>
+<li><code><a title="micromelon.NOTES.AsBb8" href="#micromelon.NOTES.AsBb8">AsBb8</a></code></li>
+<li><code><a title="micromelon.NOTES.B0" href="#micromelon.NOTES.B0">B0</a></code></li>
+<li><code><a title="micromelon.NOTES.B1" href="#micromelon.NOTES.B1">B1</a></code></li>
+<li><code><a title="micromelon.NOTES.B2" href="#micromelon.NOTES.B2">B2</a></code></li>
+<li><code><a title="micromelon.NOTES.B3" href="#micromelon.NOTES.B3">B3</a></code></li>
+<li><code><a title="micromelon.NOTES.B4" href="#micromelon.NOTES.B4">B4</a></code></li>
+<li><code><a title="micromelon.NOTES.B5" href="#micromelon.NOTES.B5">B5</a></code></li>
+<li><code><a title="micromelon.NOTES.B6" href="#micromelon.NOTES.B6">B6</a></code></li>
+<li><code><a title="micromelon.NOTES.B7" href="#micromelon.NOTES.B7">B7</a></code></li>
+<li><code><a title="micromelon.NOTES.B8" href="#micromelon.NOTES.B8">B8</a></code></li>
+<li><code><a title="micromelon.NOTES.C0" href="#micromelon.NOTES.C0">C0</a></code></li>
+<li><code><a title="micromelon.NOTES.C1" href="#micromelon.NOTES.C1">C1</a></code></li>
+<li><code><a title="micromelon.NOTES.C2" href="#micromelon.NOTES.C2">C2</a></code></li>
+<li><code><a title="micromelon.NOTES.C3" href="#micromelon.NOTES.C3">C3</a></code></li>
+<li><code><a title="micromelon.NOTES.C4" href="#micromelon.NOTES.C4">C4</a></code></li>
+<li><code><a title="micromelon.NOTES.C5" href="#micromelon.NOTES.C5">C5</a></code></li>
+<li><code><a title="micromelon.NOTES.C6" href="#micromelon.NOTES.C6">C6</a></code></li>
+<li><code><a title="micromelon.NOTES.C7" href="#micromelon.NOTES.C7">C7</a></code></li>
+<li><code><a title="micromelon.NOTES.C8" href="#micromelon.NOTES.C8">C8</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb0" href="#micromelon.NOTES.CsDb0">CsDb0</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb1" href="#micromelon.NOTES.CsDb1">CsDb1</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb2" href="#micromelon.NOTES.CsDb2">CsDb2</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb3" href="#micromelon.NOTES.CsDb3">CsDb3</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb4" href="#micromelon.NOTES.CsDb4">CsDb4</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb5" href="#micromelon.NOTES.CsDb5">CsDb5</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb6" href="#micromelon.NOTES.CsDb6">CsDb6</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb7" href="#micromelon.NOTES.CsDb7">CsDb7</a></code></li>
+<li><code><a title="micromelon.NOTES.CsDb8" href="#micromelon.NOTES.CsDb8">CsDb8</a></code></li>
+<li><code><a title="micromelon.NOTES.D0" href="#micromelon.NOTES.D0">D0</a></code></li>
+<li><code><a title="micromelon.NOTES.D1" href="#micromelon.NOTES.D1">D1</a></code></li>
+<li><code><a title="micromelon.NOTES.D2" href="#micromelon.NOTES.D2">D2</a></code></li>
+<li><code><a title="micromelon.NOTES.D3" href="#micromelon.NOTES.D3">D3</a></code></li>
+<li><code><a title="micromelon.NOTES.D4" href="#micromelon.NOTES.D4">D4</a></code></li>
+<li><code><a title="micromelon.NOTES.D5" href="#micromelon.NOTES.D5">D5</a></code></li>
+<li><code><a title="micromelon.NOTES.D6" href="#micromelon.NOTES.D6">D6</a></code></li>
+<li><code><a title="micromelon.NOTES.D7" href="#micromelon.NOTES.D7">D7</a></code></li>
+<li><code><a title="micromelon.NOTES.D8" href="#micromelon.NOTES.D8">D8</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb0" href="#micromelon.NOTES.DsEb0">DsEb0</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb1" href="#micromelon.NOTES.DsEb1">DsEb1</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb2" href="#micromelon.NOTES.DsEb2">DsEb2</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb3" href="#micromelon.NOTES.DsEb3">DsEb3</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb4" href="#micromelon.NOTES.DsEb4">DsEb4</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb5" href="#micromelon.NOTES.DsEb5">DsEb5</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb6" href="#micromelon.NOTES.DsEb6">DsEb6</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb7" href="#micromelon.NOTES.DsEb7">DsEb7</a></code></li>
+<li><code><a title="micromelon.NOTES.DsEb8" href="#micromelon.NOTES.DsEb8">DsEb8</a></code></li>
+<li><code><a title="micromelon.NOTES.E0" href="#micromelon.NOTES.E0">E0</a></code></li>
+<li><code><a title="micromelon.NOTES.E1" href="#micromelon.NOTES.E1">E1</a></code></li>
+<li><code><a title="micromelon.NOTES.E2" href="#micromelon.NOTES.E2">E2</a></code></li>
+<li><code><a title="micromelon.NOTES.E3" href="#micromelon.NOTES.E3">E3</a></code></li>
+<li><code><a title="micromelon.NOTES.E4" href="#micromelon.NOTES.E4">E4</a></code></li>
+<li><code><a title="micromelon.NOTES.E5" href="#micromelon.NOTES.E5">E5</a></code></li>
+<li><code><a title="micromelon.NOTES.E6" href="#micromelon.NOTES.E6">E6</a></code></li>
+<li><code><a title="micromelon.NOTES.E7" href="#micromelon.NOTES.E7">E7</a></code></li>
+<li><code><a title="micromelon.NOTES.E8" href="#micromelon.NOTES.E8">E8</a></code></li>
+<li><code><a title="micromelon.NOTES.F0" href="#micromelon.NOTES.F0">F0</a></code></li>
+<li><code><a title="micromelon.NOTES.F1" href="#micromelon.NOTES.F1">F1</a></code></li>
+<li><code><a title="micromelon.NOTES.F2" href="#micromelon.NOTES.F2">F2</a></code></li>
+<li><code><a title="micromelon.NOTES.F3" href="#micromelon.NOTES.F3">F3</a></code></li>
+<li><code><a title="micromelon.NOTES.F4" href="#micromelon.NOTES.F4">F4</a></code></li>
+<li><code><a title="micromelon.NOTES.F5" href="#micromelon.NOTES.F5">F5</a></code></li>
+<li><code><a title="micromelon.NOTES.F6" href="#micromelon.NOTES.F6">F6</a></code></li>
+<li><code><a title="micromelon.NOTES.F7" href="#micromelon.NOTES.F7">F7</a></code></li>
+<li><code><a title="micromelon.NOTES.F8" href="#micromelon.NOTES.F8">F8</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb0" href="#micromelon.NOTES.FsGb0">FsGb0</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb1" href="#micromelon.NOTES.FsGb1">FsGb1</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb2" href="#micromelon.NOTES.FsGb2">FsGb2</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb3" href="#micromelon.NOTES.FsGb3">FsGb3</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb4" href="#micromelon.NOTES.FsGb4">FsGb4</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb5" href="#micromelon.NOTES.FsGb5">FsGb5</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb6" href="#micromelon.NOTES.FsGb6">FsGb6</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb7" href="#micromelon.NOTES.FsGb7">FsGb7</a></code></li>
+<li><code><a title="micromelon.NOTES.FsGb8" href="#micromelon.NOTES.FsGb8">FsGb8</a></code></li>
+<li><code><a title="micromelon.NOTES.G0" href="#micromelon.NOTES.G0">G0</a></code></li>
+<li><code><a title="micromelon.NOTES.G1" href="#micromelon.NOTES.G1">G1</a></code></li>
+<li><code><a title="micromelon.NOTES.G2" href="#micromelon.NOTES.G2">G2</a></code></li>
+<li><code><a title="micromelon.NOTES.G3" href="#micromelon.NOTES.G3">G3</a></code></li>
+<li><code><a title="micromelon.NOTES.G4" href="#micromelon.NOTES.G4">G4</a></code></li>
+<li><code><a title="micromelon.NOTES.G5" href="#micromelon.NOTES.G5">G5</a></code></li>
+<li><code><a title="micromelon.NOTES.G6" href="#micromelon.NOTES.G6">G6</a></code></li>
+<li><code><a title="micromelon.NOTES.G7" href="#micromelon.NOTES.G7">G7</a></code></li>
+<li><code><a title="micromelon.NOTES.G8" href="#micromelon.NOTES.G8">G8</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb0" href="#micromelon.NOTES.GsAb0">GsAb0</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb1" href="#micromelon.NOTES.GsAb1">GsAb1</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb2" href="#micromelon.NOTES.GsAb2">GsAb2</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb3" href="#micromelon.NOTES.GsAb3">GsAb3</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb4" href="#micromelon.NOTES.GsAb4">GsAb4</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb5" href="#micromelon.NOTES.GsAb5">GsAb5</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb6" href="#micromelon.NOTES.GsAb6">GsAb6</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb7" href="#micromelon.NOTES.GsAb7">GsAb7</a></code></li>
+<li><code><a title="micromelon.NOTES.GsAb8" href="#micromelon.NOTES.GsAb8">GsAb8</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="micromelon.RoverController" href="#micromelon.RoverController">RoverController</a></code></h4>
+<ul class="">
+<li><code><a title="micromelon.RoverController.connectBLE" href="#micromelon.RoverController.connectBLE">connectBLE</a></code></li>
+<li><code><a title="micromelon.RoverController.connectIP" href="#micromelon.RoverController.connectIP">connectIP</a></code></li>
+<li><code><a title="micromelon.RoverController.connectSerial" href="#micromelon.RoverController.connectSerial">connectSerial</a></code></li>
+<li><code><a title="micromelon.RoverController.connectedRobotIsSimulated" href="#micromelon.RoverController.connectedRobotIsSimulated">connectedRobotIsSimulated</a></code></li>
+<li><code><a title="micromelon.RoverController.disconnect" href="#micromelon.RoverController.disconnect">disconnect</a></code></li>
+<li><code><a title="micromelon.RoverController.doMotorOperation" href="#micromelon.RoverController.doMotorOperation">doMotorOperation</a></code></li>
+<li><code><a title="micromelon.RoverController.end" href="#micromelon.RoverController.end">end</a></code></li>
+<li><code><a title="micromelon.RoverController.getTransactionAverageMS" href="#micromelon.RoverController.getTransactionAverageMS">getTransactionAverageMS</a></code></li>
+<li><code><a title="micromelon.RoverController.getTransmitAverageMS" href="#micromelon.RoverController.getTransmitAverageMS">getTransmitAverageMS</a></code></li>
+<li><code><a title="micromelon.RoverController.isConnected" href="#micromelon.RoverController.isConnected">isConnected</a></code></li>
+<li><code><a title="micromelon.RoverController.readAttribute" href="#micromelon.RoverController.readAttribute">readAttribute</a></code></li>
+<li><code><a title="micromelon.RoverController.setDefaultCommunicationTimeout" href="#micromelon.RoverController.setDefaultCommunicationTimeout">setDefaultCommunicationTimeout</a></code></li>
+<li><code><a title="micromelon.RoverController.setRoverToUART" href="#micromelon.RoverController.setRoverToUART">setRoverToUART</a></code></li>
+<li><code><a title="micromelon.RoverController.startRover" href="#micromelon.RoverController.startRover">startRover</a></code></li>
+<li><code><a title="micromelon.RoverController.stopRover" href="#micromelon.RoverController.stopRover">stopRover</a></code></li>
+<li><code><a title="micromelon.RoverController.writeAttribute" href="#micromelon.RoverController.writeAttribute">writeAttribute</a></code></li>
+<li><code><a title="micromelon.RoverController.writePacket" href="#micromelon.RoverController.writePacket">writePacket</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="micromelon.TUNES" href="#micromelon.TUNES">TUNES</a></code></h4>
+<ul class="">
+<li><code><a title="micromelon.TUNES.DOWN" href="#micromelon.TUNES.DOWN">DOWN</a></code></li>
+<li><code><a title="micromelon.TUNES.UP" href="#micromelon.TUNES.UP">UP</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

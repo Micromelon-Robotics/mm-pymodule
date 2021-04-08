@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>micromelon.helper_math API documentation</title>
+<meta name="description" content="Collection of helpful maths functions and aliases" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>.homelink img{max-width:20%;max-height:5em;margin:auto;margin-bottom:.3em}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>micromelon.helper_math</code></h1>
+</header>
+<section id="section-intro">
+<p>Collection of helpful maths functions and aliases</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Collection of helpful maths functions and aliases
+&#34;&#34;&#34;
+from ._math import *
+
+__all__ = [
+    &#34;isBetween&#34;,
+    &#34;constrain&#34;,
+    &#34;scale&#34;,
+    &#34;isPrime&#34;,
+    &#34;randint&#34;,
+    &#34;random&#34;,
+]</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="micromelon.helper_math.constrain"><code class="name flex">
+<span>def <span class="ident">constrain</span></span>(<span>x, low, high)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Restrict a number to a range
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>number</code></dt>
+<dd>the number to restrict
+</dd>
+<dt><strong><code>low</code></strong> :&ensp;<code>number</code></dt>
+<dd>lower bound
+</dd>
+<dt><strong><code>high</code></strong> :&ensp;<code>number</code></dt>
+<dd>upper bound
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if any of the arguments aren't numbers
+</p>
+<h2 id="returns">Returns</h2>
+<p>x clamped to between low and high inclusive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def constrain(x, low, high):
+    &#34;&#34;&#34;
+    Restrict a number to a range
+
+    Args:
+      x (number): the number to restrict
+      low (number): lower bound
+      high (number): upper bound
+
+    Raises:
+      Exception if any of the arguments aren&#39;t numbers
+
+    Returns:
+      x clamped to between low and high inclusive
+    &#34;&#34;&#34;
+    if not _isNumber(x) or not _isNumber(low) or not _isNumber(high):
+        raise Exception(&#34;All arguments to Math.constrain must be numbers&#34;)
+    if high &lt; low:
+        temp = low
+        low = high
+        high = temp
+
+    if x &gt;= high:
+        return high
+    if x &lt;= low:
+        return low
+    return x</code></pre>
+</details>
+</dd>
+<dt id="micromelon.helper_math.isBetween"><code class="name flex">
+<span>def <span class="ident">isBetween</span></span>(<span>x, low, high)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a number is between or equal to two other numbers<br>
+If the lower bound is greater than the upper bound they will be switched
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>number</code></dt>
+<dd>the number to check
+</dd>
+<dt><strong><code>low</code></strong> :&ensp;<code>number</code></dt>
+<dd>lower bound
+</dd>
+<dt><strong><code>high</code></strong> :&ensp;<code>number</code></dt>
+<dd>upper bound
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if any of the arguments aren't numbers
+</p>
+<h2 id="returns">Returns</h2>
+<p>true iff (if and only if) x is between low and high inclusive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def isBetween(x, low, high):
+    &#34;&#34;&#34;
+    Check if a number is between or equal to two other numbers
+    If the lower bound is greater than the upper bound they will be switched
+
+    Args:
+      x (number): the number to check
+      low (number): lower bound
+      high (number): upper bound
+
+    Raises:
+      Exception if any of the arguments aren&#39;t numbers
+
+    Returns:
+      true iff (if and only if) x is between low and high inclusive
+    &#34;&#34;&#34;
+    if not _isNumber(x) or not _isNumber(low) or not _isNumber(high):
+        raise Exception(&#34;All arguments to Math.isBetween must be numbers&#34;)
+
+    l = low
+    h = high
+    if low &gt; high:
+        h = low
+        l = high
+
+    return x &gt;= l and x &lt;= h</code></pre>
+</details>
+</dd>
+<dt id="micromelon.helper_math.isPrime"><code class="name flex">
+<span>def <span class="ident">isPrime</span></span>(<span>n)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine if a number is a prime number<br>
+Simple primality test using the 6k +- 1 optimisation<br>
+<a href="https://en.wikipedia.org/wiki/Primality_test">https://en.wikipedia.org/wiki/Primality_test</a>
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>number to check
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if n is not an integer
+</p>
+<h2 id="returns">Returns</h2>
+<p>True if n is prime.
+False otherwise</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def isPrime(n):
+    &#34;&#34;&#34;
+    Determine if a number is a prime number
+    Simple primality test using the 6k +- 1 optimisation
+    https://en.wikipedia.org/wiki/Primality_test
+
+    Args:
+      n (int): number to check
+
+    Raises:
+      Exception if n is not an integer
+
+    Returns:
+      True if n is prime.  False otherwise
+    &#34;&#34;&#34;
+    if not isinstance(n, int):
+        raise Exception(&#34;Argument to isPrime must be an integer&#34;)
+
+    if n &lt;= 1:
+        return False
+    elif n &lt;= 3:
+        return True
+    elif n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    s = int(_math.sqrt(n)) + 1
+    while i &lt;= s:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True</code></pre>
+</details>
+</dd>
+<dt id="micromelon.helper_math.randint"><code class="name flex">
+<span>def <span class="ident">randint</span></span>(<span>low, high)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Alias to python's random.randint<br>
+Generate random integers between two numbers
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>low</code></strong> :&ensp;<code>int</code></dt>
+<dd>lower bound
+</dd>
+<dt><strong><code>high</code></strong> :&ensp;<code>int</code></dt>
+<dd>upper bound
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if arguments are not both integers
+</p>
+<h2 id="returns">Returns</h2>
+<p>a pseudorandom integer between low and high inclusive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def randint(low, high):
+    &#34;&#34;&#34;
+    Alias to python&#39;s random.randint
+    Generate random integers between two numbers
+
+    Args:
+      low (int): lower bound
+      high (int): upper bound
+
+    Raises:
+      Exception if arguments are not both integers
+
+    Returns:
+      a pseudorandom integer between low and high inclusive
+    &#34;&#34;&#34;
+    if not isinstance(low, int) or not isinstance(high, int):
+        raise Exception(&#34;Both arguments to randint must be integers&#34;)
+    return _rand.randint(low, high)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.helper_math.random"><code class="name flex">
+<span>def <span class="ident">random</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Alias to python's random.random
+</p>
+<h2 id="returns">Returns</h2>
+<p>a random floating point number (decimal fraction) between 0 and 1</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def random():
+    &#34;&#34;&#34;
+    Alias to python&#39;s random.random
+
+    Returns:
+      a random floating point number (decimal fraction) between 0 and 1
+    &#34;&#34;&#34;
+    return _rand.random()</code></pre>
+</details>
+</dd>
+<dt id="micromelon.helper_math.scale"><code class="name flex">
+<span>def <span class="ident">scale</span></span>(<span>x, xmin, xmax, newMin, newMax)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scale a number from the range xmin - xmax to the range newMin - newMax<br>
+Output is restricted to between newMin and newMax inclusive<br>
+If newMin is greater than newMax or xmin is greater than xmax<br>
+it will be treated and inversely proportional
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>number</code></dt>
+<dd>the input to scale
+</dd>
+<dt><strong><code>xmin</code></strong> :&ensp;<code>number</code></dt>
+<dd>the current minimum for x
+</dd>
+<dt><strong><code>xmax</code></strong> :&ensp;<code>number</code></dt>
+<dd>the current maximum for x
+</dd>
+<dt><strong><code>newMin</code></strong> :&ensp;<code>number</code></dt>
+<dd>the minimum of the range to scale x to
+</dd>
+<dt><strong><code>newMax</code></strong> :&ensp;<code>number</code></dt>
+<dd>the maximum of the range to scale x to
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if any of the arguments aren't numbers<br>
+Excpetion if xmin equals xmax or newMin equals newMax<br>
+Returns<br>
+x scaled from the range xmin - xmax to the range newMin - newMax</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def scale(x, xmin, xmax, newMin, newMax):
+    &#34;&#34;&#34;
+    Scale a number from the range xmin - xmax to the range newMin - newMax
+    Output is restricted to between newMin and newMax inclusive
+    If newMin is greater than newMax or xmin is greater than xmax
+    it will be treated and inversely proportional
+
+    Args:
+      x (number): the input to scale
+      xmin (number): the current minimum for x
+      xmax (number): the current maximum for x
+      newMin (number): the minimum of the range to scale x to
+      newMax (number): the maximum of the range to scale x to
+
+    Raises:
+      Exception if any of the arguments aren&#39;t numbers
+      Excpetion if xmin equals xmax or newMin equals newMax
+
+    Returns
+      x scaled from the range xmin - xmax to the range newMin - newMax
+    &#34;&#34;&#34;
+    if (
+        not _isNumber(x)
+        or not _isNumber(xmin)
+        or not _isNumber(xmax)
+        or not _isNumber(newMin)
+        or not _isNumber(newMax)
+    ):
+        raise Exception(&#34;All arguments to scale must be numbers&#34;)
+    invert = False
+    temp = None
+    if xmax &lt; xmin and newMax &lt; newMin:
+        temp = xmin
+        xmin = xmax
+        xmax = temp
+        temp = newMin
+        newMin = newMax
+        newMax = temp
+    elif xmax &lt; xmin and newMin &lt; newMax:
+        invert = True
+        temp = xmin
+        xmin = xmax
+        xmax = temp
+    elif xmin &lt; xmax and newMax &lt; newMin:
+        invert = True
+        temp = newMin
+        newMin = newMax
+        newMax = temp
+    elif xmin == xmax or newMin == newMax:
+        raise Exception(&#34;Min and max cannot be the same number in scale function&#34;)
+
+    scaled = (((x - xmin) / (xmax - xmin)) * (newMax - newMin)) + newMin
+    if invert:
+        scaled = newMax - (scaled - newMin)
+    if scaled &gt; newMax:
+        return newMax
+    if scaled &lt; newMin:
+        return newMin
+    return scaled</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<img src="../mm-logo.png" alt="Micromelon Logo">
+</header>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="micromelon" href="../index.html">micromelon</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="micromelon.helper_math.constrain" href="#micromelon.helper_math.constrain">constrain</a></code></li>
+<li><code><a title="micromelon.helper_math.isBetween" href="#micromelon.helper_math.isBetween">isBetween</a></code></li>
+<li><code><a title="micromelon.helper_math.isPrime" href="#micromelon.helper_math.isPrime">isPrime</a></code></li>
+<li><code><a title="micromelon.helper_math.randint" href="#micromelon.helper_math.randint">randint</a></code></li>
+<li><code><a title="micromelon.helper_math.random" href="#micromelon.helper_math.random">random</a></code></li>
+<li><code><a title="micromelon.helper_math.scale" href="#micromelon.helper_math.scale">scale</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

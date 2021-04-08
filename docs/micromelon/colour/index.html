@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>micromelon.colour API documentation</title>
+<meta name="description" content="Collection of functions for manipulating colour representations.
+Includes functions for reading from the robot&#39;s colour sensors." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>.homelink img{max-width:20%;max-height:5em;margin:auto;margin-bottom:.3em}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>micromelon.colour</code></h1>
+</header>
+<section id="section-intro">
+<p>Collection of functions for manipulating colour representations.<br>
+Includes functions for reading from the robot's colour sensors.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Collection of functions for manipulating colour representations.
+Includes functions for reading from the robot&#39;s colour sensors.
+&#34;&#34;&#34;
+from ._colour import *
+
+__all__ = [
+    &#34;CS&#34;,
+    &#34;random&#34;,
+    &#34;randomHue&#34;,
+    &#34;rgb&#34;,
+    &#34;pick&#34;,
+    &#34;hsv&#34;,
+    &#34;hue&#34;,
+    &#34;blend&#34;,
+    &#34;readAllSensors&#34;,
+    &#34;readSensor&#34;,
+    &#34;sensorSees&#34;,
+    &#34;rgbToHsv&#34;,
+    &#34;hsvToRgb&#34;,
+    &#34;hexToRgb&#34;,
+    &#34;rgbToHex&#34;,
+]</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="micromelon.colour.blend"><code class="name flex">
+<span>def <span class="ident">blend</span></span>(<span>c1, c2, ratio, isHSV=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Combine the colours c1 and c2 with the given ratio in the rgb space<br>
+Colour arguments are treated as rgb arrays by default but can be treated as hsv by setting the flag
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>c1</code></strong> :&ensp;<code>array</code></dt>
+<dd>colour array of [r, g, b] or [h, s, v]
+</dd>
+<dt><strong><code>c2</code></strong> :&ensp;<code>array</code></dt>
+<dd>colour array of [r, g, b] or [h, s, v]
+</dd>
+<dt><strong><code>ratio</code></strong> :&ensp;<code>float</code></dt>
+<dd>blend ratio - 0 results in all c1, 1 in all c2
+</dd>
+<dt><strong><code>isHSV</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>if true c1 and c2 are treated as hsv arrays
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if the blend ratio is not between 0 and 1 inclusive<br>
+Exception if the colours are not valid (0-255 for r, g, and b values, 0-360 for h, 0-1 for s and v)
+</p>
+<h2 id="returns">Returns</h2>
+<p>Colour array [r, g, b] of c1 and c2 combined with the given ratio</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def blend(c1, c2, ratio, isHSV=False):
+    &#34;&#34;&#34;
+    Combine the colours c1 and c2 with the given ratio in the rgb space
+    Colour arguments are treated as rgb arrays by default but can be treated as hsv by setting the flag
+
+    Args:
+      c1 (array): colour array of [r, g, b] or [h, s, v]
+      c2 (array): colour array of [r, g, b] or [h, s, v]
+      ratio (float): blend ratio - 0 results in all c1, 1 in all c2
+      isHSV (boolean): if true c1 and c2 are treated as hsv arrays
+
+    Raises:
+      Exception if the blend ratio is not between 0 and 1 inclusive
+      Exception if the colours are not valid (0-255 for r, g, and b values, 0-360 for h, 0-1 for s and v)
+
+    Returns:
+      Colour array [r, g, b] of c1 and c2 combined with the given ratio
+    &#34;&#34;&#34;
+    if ratio &gt; 1 or ratio &lt; 0:
+        raise Exception(&#34;Blend ratio must be between 0 and 1&#34;)
+    if isHSV:
+        c1 = hsv(c1[0], c1[1], c1[2])
+        c2 = hsv(c2[0], c2[1], c2[2])
+
+    checked = _checkRGB(c1[0], c1[1], c1[2])
+    if checked[0] == False:
+        return checked
+
+    checked = _checkRGB(c2[0], c2[1], c2[2])
+    if checked[0] == False:
+        return checked
+
+    r = round(c1[0] * (1 - ratio) + c2[0] * ratio)
+    g = round(c1[1] * (1 - ratio) + c2[1] * ratio)
+    b = round(c1[2] * (1 - ratio) + c2[2] * ratio)
+    return [r, g, b]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.hexToRgb"><code class="name flex">
+<span>def <span class="ident">hexToRgb</span></span>(<span>hex)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts hex colour codes eg. #FFF or #00FF0F to rgb array
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>hex</code></strong> :&ensp;<code>string</code></dt>
+<dd>colour code # followed by 3 or 6 hexadecimal digits
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Array [r, g, b] each in the range of 0 - 255 inclusive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def hexToRgb(hex):
+    &#34;&#34;&#34;
+    Converts hex colour codes eg. #FFF or #00FF0F to rgb array
+
+    Args:
+      hex (string): colour code # followed by 3 or 6 hexadecimal digits
+
+    Returns:
+      Array [r, g, b] each in the range of 0 - 255 inclusive
+    &#34;&#34;&#34;
+    # strip &#39;#&#39;
+    if hex[0] == &#34;#&#34;:
+        hex = hex[1:]
+    if len(hex) == 3:
+        # Expand shorthand form (e.g. &#34;03F&#34;) to full form (e.g. &#34;0033FF&#34;)
+        return [int(hex[i] * 2, 16) for i in (0, 1, 2)]
+    return [int(hex[i : i + 2], 16) for i in (0, 2, 4)]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.hsv"><code class="name flex">
+<span>def <span class="ident">hsv</span></span>(<span>h, s, v)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates hsv colour and converts to rgb
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>h</code></strong> :&ensp;<code>int</code></dt>
+<dd>hue value - must be between 0 and 360 inclusive
+</dd>
+<dt><strong><code>s</code></strong> :&ensp;<code>float</code></dt>
+<dd>saturation value - must be between 0 and 1 inclusive
+</dd>
+<dt><strong><code>v</code></strong> :&ensp;<code>float</code></dt>
+<dd>brightness value - must be between 0 and 1 inclusive
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if the values are outside valid ranges for hsv<br>
+Valid range is 0 - 359 inclusive for hue and 0 - 1 inclusive for saturation and value
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array of three integers between 0 and 255 in the form [r, g, b] that is equivalent to the hsv arguments</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def hsv(h, s, v):
+    &#34;&#34;&#34;
+    Validates hsv colour and converts to rgb
+
+    Args:
+      h (int): hue value - must be between 0 and 360 inclusive
+      s (float): saturation value - must be between 0 and 1 inclusive
+      v (float): brightness value - must be between 0 and 1 inclusive
+
+    Raises:
+      Exception if the values are outside valid ranges for hsv
+        Valid range is 0 - 359 inclusive for hue and 0 - 1 inclusive for saturation and value
+
+    Returns:
+      Array of three integers between 0 and 255 in the form [r, g, b] that is equivalent to the hsv arguments
+    &#34;&#34;&#34;
+    c = _checkHSV(h, s, v)
+    return hsvToRgb(c[0], c[1], c[2])</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.hsvToRgb"><code class="name flex">
+<span>def <span class="ident">hsvToRgb</span></span>(<span>h, s, v)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts an HSV color value to RGB. Conversion formula<br>
+adapted from <a href="http://en.wikipedia.org/wiki/HSV_color_space.">http://en.wikipedia.org/wiki/HSV_color_space.</a>
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>h</code></strong> :&ensp;<code>int</code></dt>
+<dd>hue value between 0 and 360
+</dd>
+<dt><strong><code>s</code></strong> :&ensp;<code>float</code></dt>
+<dd>saturation between 0 and 1
+</dd>
+<dt><strong><code>v</code></strong> :&ensp;<code>float</code></dt>
+<dd>brightness (value) between 0 and 1
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Array [red, green, blue]<br>
+red, green, and blue values between 0 and 255 inclusive<br>
+hue between 0 and 360 inclusive, s and v between 0 and 1 inclusive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def hsvToRgb(h, s, v):
+    &#34;&#34;&#34;
+    Converts an HSV color value to RGB. Conversion formula
+    adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+    Args:
+      h (int): hue value between 0 and 360
+      s (float): saturation between 0 and 1
+      v (float): brightness (value) between 0 and 1
+
+    Returns:
+      Array [red, green, blue]
+        red, green, and blue values between 0 and 255 inclusive
+        hue between 0 and 360 inclusive, s and v between 0 and 1 inclusive
+    &#34;&#34;&#34;
+    r = None
+    g = None
+    b = None
+
+    h60 = h / 60.0
+    h60f = math.floor(h60)
+    hi = int(h60f) % 6
+    f = h60 - h60f
+    p = v * (1 - s)
+    q = v * (1 - f * s)
+    t = v * (1 - (1 - f) * s)
+    r, g, b = 0, 0, 0
+    if hi == 0:
+        r, g, b = v, t, p
+    elif hi == 1:
+        r, g, b = q, v, p
+    elif hi == 2:
+        r, g, b = p, v, t
+    elif hi == 3:
+        r, g, b = p, q, v
+    elif hi == 4:
+        r, g, b = t, p, v
+    elif hi == 5:
+        r, g, b = v, p, q
+    r, g, b = round(r * 255), round(g * 255), round(b * 255)
+    return [r, g, b]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.hue"><code class="name flex">
+<span>def <span class="ident">hue</span></span>(<span>hue)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates and calculates rgb colour with full saturation and brightness for the given hue
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>hue</code></strong> :&ensp;<code>int</code></dt>
+<dd>hue value - must be between 0 and 360 inclusive
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if the hue is outside the valid range of 0 - 360 inclusive
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array of three integers between 0 and 255 in the form [r, g, b]<br>
+that is equivalent to the hsv(hue, 1, 1)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def hue(hue):
+    &#34;&#34;&#34;
+    Validates and calculates rgb colour with full saturation and brightness for the given hue
+
+    Args:
+      hue (int): hue value - must be between 0 and 360 inclusive
+
+    Raises:
+      Exception if the hue is outside the valid range of 0 - 360 inclusive
+
+    Returns:
+      Array of three integers between 0 and 255 in the form [r, g, b]
+        that is equivalent to the hsv(hue, 1, 1)
+    &#34;&#34;&#34;
+    return hsv(hue, 1, 1)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.pick"><code class="name flex">
+<span>def <span class="ident">pick</span></span>(<span>r, g, b)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Alias for Colour.rgb</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pick(r, g, b):
+    &#34;&#34;&#34;
+    Alias for Colour.rgb
+    &#34;&#34;&#34;
+    return rgb(r, g, b)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.random"><code class="name flex">
+<span>def <span class="ident">random</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a random colour in the rgb colour space
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array of three integers between 0 and 255 in the form [r, g, b]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def random():
+    &#34;&#34;&#34;
+    Generate a random colour in the rgb colour space
+
+    Returns:
+      Array of three integers between 0 and 255 in the form [r, g, b]
+    &#34;&#34;&#34;
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return [r, g, b]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.randomHue"><code class="name flex">
+<span>def <span class="ident">randomHue</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a random hue colour with full saturation and brightness
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array of three integers between 0 and 255 in the form [r, g, b]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def randomHue():
+    &#34;&#34;&#34;
+    Generate a random hue colour with full saturation and brightness
+
+    Returns:
+      Array of three integers between 0 and 255 in the form [r, g, b]
+    &#34;&#34;&#34;
+    return hsvToRgb(random.randint(0, 359), 1, 1)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.readAllSensors"><code class="name flex">
+<span>def <span class="ident">readAllSensors</span></span>(<span>option=CS.ALL)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads values from the three colour sensors.<br>
+You'll need to calibrate with these values for your situation
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>option</code></strong> :&ensp;<code>int</code></dt>
+<dd>one of CS.HUE, CS.RED, CS.GREEN, CS.BLUE, CS.BRIGHT, and CS.ALL<br>
+defaults to CS.ALL
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if the colour sensor read fails<br>
+Exception if the option argument isn't valid
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array of sensor readings in the form [left, middle, right]<br>
+CS.RED, CS.GREEN, CS.BLUE, and CS.BRIGHT options give integer readings between 0 and 255 inclusive<br>
+CS.HUE gives integer readings between 0 and 360 inclusive<br>
+CS.ALL gives an array of all readings in the form [HUE, RED, GREEN, BLUE, BRIGHT]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def readAllSensors(option=CS.ALL):
+    &#34;&#34;&#34;
+    Reads values from the three colour sensors.
+    You&#39;ll need to calibrate with these values for your situation
+
+    Args:
+      option (int): one of CS.HUE, CS.RED, CS.GREEN, CS.BLUE, CS.BRIGHT, and CS.ALL
+                defaults to CS.ALL
+
+    Raises:
+      Exception if the colour sensor read fails
+      Exception if the option argument isn&#39;t valid
+
+    Returns:
+      Array of sensor readings in the form [left, middle, right]
+        CS.RED, CS.GREEN, CS.BLUE, and CS.BRIGHT options give integer readings between 0 and 255 inclusive
+        CS.HUE gives integer readings between 0 and 360 inclusive
+        CS.ALL gives an array of all readings in the form [HUE, RED, GREEN, BLUE, BRIGHT]
+    &#34;&#34;&#34;
+    if isinstance(option, CS):
+        option = option.value
+    if option &lt; 0 or option &gt; 5:
+        raise Exception(&#34;Invalid Colour Sensor read option&#34;)
+
+    reading = _readRawColourFromRobot()
+    if not reading:
+        raise Exception(&#34;Colour sensor read failed&#34;)
+
+    if option == CS.ALL.value:
+        return reading
+
+    return [reading[0][option], reading[1][option], reading[2][option]]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.readSensor"><code class="name flex">
+<span>def <span class="ident">readSensor</span></span>(<span>option=CS.HUE, sensor=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads a value from one of the colour sensors.<br>
+You'll need to calibrate with these values for your situation
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>option</code></strong> :&ensp;<code>int</code></dt>
+<dd>one of CS.HUE, CS.RED, CS.GREEN, CS.BLUE, CS.BRIGHT, and CS.ALL<br>
+defaults to CS.HUE
+</dd>
+<dt><strong><code>sensor</code></strong> :&ensp;<code>int</code></dt>
+<dd>0, 1, or 2 for left, middle, and right sensors
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if the colour sensor read fails<br>
+Exception if the option or sensor arguments aren't valid
+</p>
+<h2 id="returns">Returns</h2>
+<p>Either integer or array depending on option<br>
+CS.RED, CS.GREEN, CS.BLUE, and CS.BRIGHT options give integer readings between 0 and 255 inclusive<br>
+CS.HUE gives integer readings between 0 and 360 inclusive<br>
+CS.ALL gives an array of all readings in the form [HUE, RED, GREEN, BLUE, BRIGHT]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def readSensor(option=CS.HUE, sensor=1):
+    &#34;&#34;&#34;
+    Reads a value from one of the colour sensors.
+    You&#39;ll need to calibrate with these values for your situation
+
+    Args:
+      option (int): one of CS.HUE, CS.RED, CS.GREEN, CS.BLUE, CS.BRIGHT, and CS.ALL
+                defaults to CS.HUE
+      sensor (int): 0, 1, or 2 for left, middle, and right sensors
+
+    Raises:
+      Exception if the colour sensor read fails
+      Exception if the option or sensor arguments aren&#39;t valid
+
+    Returns:
+      Either integer or array depending on option
+        CS.RED, CS.GREEN, CS.BLUE, and CS.BRIGHT options give integer readings between 0 and 255 inclusive
+        CS.HUE gives integer readings between 0 and 360 inclusive
+        CS.ALL gives an array of all readings in the form [HUE, RED, GREEN, BLUE, BRIGHT]
+    &#34;&#34;&#34;
+    if sensor &lt; 0 or sensor &gt; 2:
+        raise Exception(&#34;Argument for sensor must be 0, 1, or 2&#34;)
+
+    reading = readAllSensors(option)
+    return reading[sensor]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.rgb"><code class="name flex">
+<span>def <span class="ident">rgb</span></span>(<span>r, g, b)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check the values are valid for an rgb colour and return
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>r</code></strong> :&ensp;<code>int</code></dt>
+<dd>red value - must be between 0 and 255 inclusive
+</dd>
+<dt><strong><code>g</code></strong> :&ensp;<code>int</code></dt>
+<dd>green value - must be between 0 and 255 inclusive
+</dd>
+<dt><strong><code>b</code></strong> :&ensp;<code>int</code></dt>
+<dd>blue value - must be between 0 and 255 inclusive
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception if the values aren't all between 0 and 255 inclusive
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array of three integers between 0 and 255 in the form [r, g, b]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rgb(r, g, b):
+    &#34;&#34;&#34;
+    Check the values are valid for an rgb colour and return
+
+    Args:
+      r (int): red value - must be between 0 and 255 inclusive
+      g (int): green value - must be between 0 and 255 inclusive
+      b (int): blue value - must be between 0 and 255 inclusive
+
+    Raises:
+      Exception if the values aren&#39;t all between 0 and 255 inclusive
+
+    Returns:
+      Array of three integers between 0 and 255 in the form [r, g, b]
+    &#34;&#34;&#34;
+    return _checkRGB(r, g, b)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.rgbToHex"><code class="name flex">
+<span>def <span class="ident">rgbToHex</span></span>(<span>r, g, b)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts r, g, b colour to hex colour codes
+</p>
+<h2 id="args">Args</h2>
+<p>r, g, b (int): red, green, and blue values between 0 and 255 inclusive
+</p>
+<h2 id="returns">Returns</h2>
+<p>hexadecimal string beginning with '#' eg. #00FF0F</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rgbToHex(r, g, b):
+    &#34;&#34;&#34;
+    Converts r, g, b colour to hex colour codes
+
+    Args:
+      r, g, b (int): red, green, and blue values between 0 and 255 inclusive
+
+    Returns:
+      hexadecimal string beginning with &#39;#&#39; eg. #00FF0F
+    &#34;&#34;&#34;
+    return &#34;#{0:02x}{1:02x}{2:02x}&#34;.format(r, g, b)</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.rgbToHsv"><code class="name flex">
+<span>def <span class="ident">rgbToHsv</span></span>(<span>r, g, b)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts an RGB color value to HSV. Conversion formula<br>
+adapted from <a href="http://en.wikipedia.org/wiki/HSV_color_space.">http://en.wikipedia.org/wiki/HSV_color_space.</a>
+</p>
+<h2 id="args">Args</h2>
+<p>r, g, b (int): red, green, and blue values between 0 and 255 inclusive
+</p>
+<h2 id="returns">Returns</h2>
+<p>Array [hue, saturation, value]<br>
+hue between 0 and 360 inclusive, s and v between 0 and 1 inclusive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rgbToHsv(r, g, b):
+    &#34;&#34;&#34;
+    Converts an RGB color value to HSV. Conversion formula
+    adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+
+    Args:
+      r, g, b (int): red, green, and blue values between 0 and 255 inclusive
+
+    Returns:
+      Array [hue, saturation, value]
+        hue between 0 and 360 inclusive, s and v between 0 and 1 inclusive
+    &#34;&#34;&#34;
+    r /= 255.0
+    g /= 255.0
+    b /= 255.0
+
+    mx = max(r, g, b)
+    mn = min(r, g, b)
+    v = mx
+    d = mx - mn
+    s = 0 if mx == 0 else d / mx
+    h = None
+
+    if mx == mn:
+        h = 0
+        # achromatic
+        return [h, s, v]
+
+    if r == mx:
+        h = (60 * ((g - b) / d) + 360) % 360
+    if g == mx:
+        h = (60 * ((b - r) / d) + 120) % 360
+    if b == mx:
+        h = (60 * ((r - g) / d) + 240) % 360
+
+    return [round(h) % 360, s, v]</code></pre>
+</details>
+</dd>
+<dt id="micromelon.colour.sensorSees"><code class="name flex">
+<span>def <span class="ident">sensorSees</span></span>(<span>option, sensor=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determines whether or not there is red, green, blue, or white<br>
+visible to the colour sensors
+</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>option</code></strong> :&ensp;<code>int</code></dt>
+<dd>one of CS.RED, CS.GREEN, CS.BLUE, or CS.BRIGHT
+</dd>
+<dt><strong><code>sensor</code></strong> :&ensp;<code>int</code></dt>
+<dd>0, 1, 2, or None for left, middle, right, or combined sensor readings<br>
+defaults to None - if two or more sensors see the colour then return true
+</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Exception for invalid option or sensor arguments<br>
+Exception if the colour sensor read fails
+</p>
+<h2 id="returns">Returns</h2>
+<p>For RED, GREEN, and BLUE options it will return True if the specific option is<br>
+above a minimum (30) and the hue is within a range
+</p>
+<blockquote>
+<p>330 or &lt;20 for RED, between 85 and 160 for GREEN, and between 190 and 63 for BLUE<br>
+For WHITE (CS.BRIGHT) - True if the sensor reads brightness above 130 and all the colours<br>
+read within 50 of the average colour reading</p>
+</blockquote></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sensorSees(option, sensor=None):
+    &#34;&#34;&#34;
+    Determines whether or not there is red, green, blue, or white
+    visible to the colour sensors
+
+    Args:
+      option (int): one of CS.RED, CS.GREEN, CS.BLUE, or CS.BRIGHT
+      sensor (int): 0, 1, 2, or None for left, middle, right, or combined sensor readings
+                    defaults to None - if two or more sensors see the colour then return true
+
+    Raises:
+      Exception for invalid option or sensor arguments
+      Exception if the colour sensor read fails
+
+    Returns:
+      For RED, GREEN, and BLUE options it will return True if the specific option is
+        above a minimum (30) and the hue is within a range
+        &gt;330 or &lt;20 for RED, between 85 and 160 for GREEN, and between 190 and 63 for BLUE
+      For WHITE (CS.BRIGHT) - True if the sensor reads brightness above 130 and all the colours
+        read within 50 of the average colour reading
+    &#34;&#34;&#34;
+    if isinstance(option, CS):
+        option = option.value
+    if sensor != None and (sensor &lt; 0 or sensor &gt; 2):
+        raise Exception(&#34;Argument for sensor must be 0, 1, or 2&#34;)
+
+    if option &lt; 1 or option &gt; 4:
+        raise Exception(&#34;Invalid sensorSees colour option&#34;)
+
+    def colourIs(readValue, option):
+        WHITE_DEVIATION_THRESHOLD = 50
+        BRIGHTNESS_THRESHOLD = 130
+        UPPER_BRIGHTNESS_THRESHOLD = 180
+        MINIMUM_COLOUR_VALUE = 30
+
+        h = readValue[CS.HUE.value]
+        r = readValue[CS.RED.value]
+        g = readValue[CS.GREEN.value]
+        b = readValue[CS.BLUE.value]
+        w = readValue[CS.BRIGHT.value]
+
+        if option == CS.BRIGHT.value:
+            average = (r + g + b) / 3
+            if w &gt; BRIGHTNESS_THRESHOLD:
+                if (
+                    abs(r - average) &lt; WHITE_DEVIATION_THRESHOLD
+                    and abs(g - average) &lt; WHITE_DEVIATION_THRESHOLD
+                    and abs(b - average) &lt; WHITE_DEVIATION_THRESHOLD
+                ):
+                    return True
+            return False
+        if w &gt; UPPER_BRIGHTNESS_THRESHOLD:
+            return False  # Too white to be a colour
+
+        if option == CS.RED.value:
+            # return (r &gt; b and r &gt; g and r &gt; MINIMUM_COLOUR_VALUE)
+            return r &gt; MINIMUM_COLOUR_VALUE and (h &lt; 20 or h &gt; 330)
+
+        if option == CS.GREEN.value:
+            # return (g &gt; r and g &gt; b and g &gt; MINIMUM_COLOUR_VALUE)
+            return g &gt; MINIMUM_COLOUR_VALUE and (h &gt; 85 and h &lt; 160)
+
+        if option == CS.BLUE.value:
+            # return (b &gt; r and b &gt; g and b &gt; MINIMUM_COLOUR_VALUE)
+            return b &gt; MINIMUM_COLOUR_VALUE and (h &gt; 190 and h &lt; 263)
+        return False
+
+    reading = readAllSensors()
+    if sensor == None:
+        # voting majority wins
+        score = 0
+        if colourIs(reading[0], option):
+            score += 1
+        if colourIs(reading[1], option):
+            score += 1
+        if colourIs(reading[2], option):
+            score += 1
+        return score &gt;= 2
+    return colourIs(reading[sensor], option)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="micromelon.colour.CS"><code class="flex name class">
+<span>class <span class="ident">CS</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of attributes that can be read from the colour sensor<br>
+Values correspond to attribute position in the sensor read array
+</p>
+<p>CS.HUE = 0<br>
+CS.RED = 1<br>
+CS.GREEN = 2<br>
+CS.BLUE = 3<br>
+CS.BRIGHT = 4<br>
+CS.ALL = 5</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CS(Enum):
+    &#34;&#34;&#34;
+    A collection of attributes that can be read from the colour sensor
+    Values correspond to attribute position in the sensor read array
+
+    CS.HUE = 0
+    CS.RED = 1
+    CS.GREEN = 2
+    CS.BLUE = 3
+    CS.BRIGHT = 4
+    CS.ALL = 5
+    &#34;&#34;&#34;
+
+    HUE = 0
+    RED = 1
+    GREEN = 2
+    BLUE = 3
+    BRIGHT = 4
+    ALL = 5</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.colour.CS.ALL"><code class="name">var <span class="ident">ALL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.CS.BLUE"><code class="name">var <span class="ident">BLUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.CS.BRIGHT"><code class="name">var <span class="ident">BRIGHT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.CS.GREEN"><code class="name">var <span class="ident">GREEN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.CS.HUE"><code class="name">var <span class="ident">HUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.CS.RED"><code class="name">var <span class="ident">RED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<img src="../mm-logo.png" alt="Micromelon Logo">
+</header>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="micromelon" href="../index.html">micromelon</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="micromelon.colour.blend" href="#micromelon.colour.blend">blend</a></code></li>
+<li><code><a title="micromelon.colour.hexToRgb" href="#micromelon.colour.hexToRgb">hexToRgb</a></code></li>
+<li><code><a title="micromelon.colour.hsv" href="#micromelon.colour.hsv">hsv</a></code></li>
+<li><code><a title="micromelon.colour.hsvToRgb" href="#micromelon.colour.hsvToRgb">hsvToRgb</a></code></li>
+<li><code><a title="micromelon.colour.hue" href="#micromelon.colour.hue">hue</a></code></li>
+<li><code><a title="micromelon.colour.pick" href="#micromelon.colour.pick">pick</a></code></li>
+<li><code><a title="micromelon.colour.random" href="#micromelon.colour.random">random</a></code></li>
+<li><code><a title="micromelon.colour.randomHue" href="#micromelon.colour.randomHue">randomHue</a></code></li>
+<li><code><a title="micromelon.colour.readAllSensors" href="#micromelon.colour.readAllSensors">readAllSensors</a></code></li>
+<li><code><a title="micromelon.colour.readSensor" href="#micromelon.colour.readSensor">readSensor</a></code></li>
+<li><code><a title="micromelon.colour.rgb" href="#micromelon.colour.rgb">rgb</a></code></li>
+<li><code><a title="micromelon.colour.rgbToHex" href="#micromelon.colour.rgbToHex">rgbToHex</a></code></li>
+<li><code><a title="micromelon.colour.rgbToHsv" href="#micromelon.colour.rgbToHsv">rgbToHsv</a></code></li>
+<li><code><a title="micromelon.colour.sensorSees" href="#micromelon.colour.sensorSees">sensorSees</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="micromelon.colour.CS" href="#micromelon.colour.CS">CS</a></code></h4>
+<ul class="two-column">
+<li><code><a title="micromelon.colour.CS.ALL" href="#micromelon.colour.CS.ALL">ALL</a></code></li>
+<li><code><a title="micromelon.colour.CS.BLUE" href="#micromelon.colour.CS.BLUE">BLUE</a></code></li>
+<li><code><a title="micromelon.colour.CS.BRIGHT" href="#micromelon.colour.CS.BRIGHT">BRIGHT</a></code></li>
+<li><code><a title="micromelon.colour.CS.GREEN" href="#micromelon.colour.CS.GREEN">GREEN</a></code></li>
+<li><code><a title="micromelon.colour.CS.HUE" href="#micromelon.colour.CS.HUE">HUE</a></code></li>
+<li><code><a title="micromelon.colour.CS.RED" href="#micromelon.colour.CS.RED">RED</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

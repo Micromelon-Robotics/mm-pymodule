@@ -1,4 +1,4 @@
-![Micromelon Logo](docs/mm-logo.png)
+![Micromelon Logo](https://micromelon-robotics.github.io/mm-pymodule/mm-logo.png)
 # [Micromelon](https://www.micromelon.com.au) Python Module
 
 This module provides an API for connecting and controlling [Micromelon Rovers](https://www.micromelon.com.au/rover.html?) and simulated rovers in the [Micromelon Robot Simulator](https://www.micromelon.com.au/simulator.html).  

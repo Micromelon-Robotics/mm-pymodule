@@ -306,9 +306,9 @@ def _calcMotorSpeedsAndTime(speed, radius, degrees=None, reverse=False):
         lSpeed *= -1
         rSpeed *= -1
 
-    # print('Speeds: ' + str([lSpeed, rSpeed]))
-    # print('Distances: ' + str([lDist, rDist]))
-    # print('Seconds: ' + str(seconds))
+    # logger.debug('Speeds: ' + str([lSpeed, rSpeed]))
+    # logger.debug('Distances: ' + str([lDist, rDist]))
+    # logger.debug('Seconds: ' + str(seconds))
     return {
         "speeds": [lSpeed, rSpeed],
         # Don't include distances or time if no degrees was specified

@@ -1,6 +1,9 @@
 from .._comms_constants import MicromelonOpCode as OPCODE, MicromelonType as OPTYPE
 import queue
 import asyncio
+from ..._mm_logging import getLogger
+
+logger = getLogger()
 
 
 class _responseQueueEntry:
@@ -85,14 +88,14 @@ class UartController:
 
         try:
             self.transport.writePacketTimed(p)
-            # print('Sent: ' + self.prettyPrintPacket(opCode, opType, data))
+            # logger.debug('Sent: ' + self.prettyPrintPacket(opCode, opType, data))
             if self.transport.SHOULD_FAKE_PACKET_ACK and opCode == OPCODE.WRITE.value:
                 # Fake an ack because handled by writing with response (ble)
                 # others need to handle their own ack as could be forwarded over unreliable transports
                 self.processIncomingPacket(self.buildPacket(OPCODE.ACK.value, opType))
         except Exception as e:
             self.responseQueues.remove(opType)
-            print(e)
+            logger.debug(e)
             # TODO: process error to see if BLE should be disconnected
             raise
 
@@ -100,7 +103,6 @@ class UartController:
 
     def processIncomingPacket(self, data):
         if len(data) < 2:
-            print()
             raise Exception(
                 "Got a uart packet with length "
                 + str(len(data))
@@ -111,13 +113,13 @@ class UartController:
         opTypeD = data[1]
 
         if OPCODE(opCode) not in OPCODE.__members__.values():
-            print("not an opcode: ", opCode)
+            logger.error("Unknown opcode in  _uart.py: ", opCode)
             return
 
-        # print('Received: ' + str(list(data)))
-        payload = bytearray()
+        # logger.debug('Received: ' + str(list(data)))
+        payload = []
         if len(data) > 2 and data[2] != 0:
-            payload = bytearray(data[3:])
+            payload = data[3:]
 
         if OPCODE(opCode) == OPCODE.ACK:
             responseCallbacks: _responseQueueEntry = self.responseQueues.remove(opTypeD)
@@ -164,7 +166,7 @@ class UartController:
             if responseCallbacks:
                 responseCallbacks.future.set_exception(Exception(errorStr))
                 responseCallbacks.timeoutTask.cancel()
-            print(errorStr)
+            logger.error(errorStr)
 
     def buildPacket(self, opCode, opType, data=None):
         if data is None:

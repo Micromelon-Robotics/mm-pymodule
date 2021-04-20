@@ -1,3 +1,4 @@
+import logging
 import signal
 import sys
 import os
@@ -9,6 +10,9 @@ from ._comms_constants import (
 )
 from ._robot_communicator_threaded import RobotCommunicatorThread
 from .._binary import bytesToIntArray
+from .._mm_logging import getLogger
+
+logger = getLogger()
 
 
 class RoverController(metaclass=Singleton):
@@ -92,27 +96,27 @@ class RoverController(metaclass=Singleton):
         self._roverErrorMask = None
         try:
             self._roverSimInfo = self.readAttribute(OPTYPE.SIMULATOR_INFO)[0]
-            print("Rover siminfo: " + str(self._roverSimInfo))
+            logger.debug("Rover siminfo: " + str(self._roverSimInfo))
         except Exception as e:
             # couldn't read simulator info - assume not simulated
-            print("Rover siminfo read failed")
-            print(e)
+            logger.info("Rover siminfo read failed")
+            logger.info(e)
             self._roverSimInfo = 0
 
         try:
             self._roverCharge = self.readAttribute(OPTYPE.STATE_OF_CHARGE)[0]
-            print("Rover battery at " + str(self._roverCharge) + "%")
+            logger.info("Rover battery at " + str(self._roverCharge) + "%")
             self._roverErrorMask = bytesToIntArray(
                 self.readAttribute(OPTYPE.SENSOR_ERRORS), 2, False
             )[0]
             if self._roverErrorMask == 0:
-                print("No sensor errors detected")
+                logger.info("No sensor errors detected")
             else:
-                print("Sensor errors detected")
-                print("Error mask: " + str(self._roverErrorMask))
+                logger.warning("Sensor errors detected")
+                logger.warning("Error mask: " + str(self._roverErrorMask))
         except Exception as e:
-            print("Failed to read battery and error mask")
-            print(e)
+            logger.error("Failed to read battery and error mask")
+            logger.error(e)
 
     def connectSerial(self, port="/dev/ttyS0"):
         """
@@ -207,8 +211,8 @@ class RoverController(metaclass=Singleton):
                     timeout,
                 )
         except Exception as e:
-            print("Not all robot stop commands completed")
-            print(e)
+            logger.debug("Not all robot stop commands completed")
+            logger.debug(e)
 
     def end(self):
         """
@@ -347,7 +351,7 @@ class RoverController(metaclass=Singleton):
 
 
 def _sigint_handler(sig, frame):
-    print("Received SIGINT... Stopping robot")
+    logger.info("Received SIGINT... Stopping robot")
     try:
         rc = RoverController()
         rc.stopRover()

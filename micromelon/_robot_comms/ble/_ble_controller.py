@@ -2,6 +2,9 @@ import asyncio
 import time
 from bleak import BleakClient, BleakScanner
 from .._comms_constants import CONNECTION_STATUS
+from ..._mm_logging import getLogger
+
+logger = getLogger()
 
 MICROMELON_SERVICE_UUID = "00000001-0000-1000-8000-00805f9b34fb"
 HEARTBEAT_UUID = "00001112-0000-1000-8000-00805f9b34fb"
@@ -17,6 +20,7 @@ IO_TIMEOUT = 2  # s
 
 HEARTBEAT_TIMEOUT = 1.6  # s
 HEARTBEAT_INTERVAL = 4.0  # s
+HEARTBEAT_TASK_NAME = "HEARTBEA_TASK"
 
 
 def _format_bdaddr(a):
@@ -46,6 +50,7 @@ class BleController:
         self.lastReadWriteTime = 0
         self.pauseHeartBeat = False
         self.heartbeatRequired = True
+        self.heartbeatTask = None
 
         self.scanner = None
 
@@ -68,7 +73,7 @@ class BleController:
             self.lastReadWriteTime = time.time()
             return res
         except Exception as e:
-            print(e)
+            logger.error(e)
             return False
 
     async def write(self, gattChar, data, response):
@@ -77,7 +82,7 @@ class BleController:
             self.lastReadWriteTime = time.time()
             return res
         except Exception as e:
-            print(e)
+            logger.error(e)
             return False
 
     async def writeUartPacket(self, packet, withoutResponse):
@@ -92,8 +97,8 @@ class BleController:
             for dev in await self.scanner.get_discovered_devices():
                 if self.deviceName == None or self.deviceName == dev.name:
                     self.address = dev.address
-                    print("Found with address: ", dev.address)
-                    print("Found name: " + str(dev.name))
+                    logger.debug("Found with address: ", dev.address)
+                    logger.debug("Found name: " + str(dev.name))
                     # self.scanner.stop()
                     return
 
@@ -107,12 +112,15 @@ class BleController:
         await self.scanner.start()
         try:
             await asyncio.wait_for(self._detectionCallback(), timeout=SCAN_TIMEOUT)
-        except Exception as e:
-            print(e)
-        await self.scanner.stop()
+        except asyncio.TimeoutError as e:
+            # Add relevant message to exception
+            e.args = ("Robot not found - Scan timed out", *e.args)
+            raise
+        finally:
+            await self.scanner.stop()
         if not self.address:
             self._updateConnectionStatus(CONNECTION_STATUS.NOT_CONNECTED)
-            return False
+            raise Exception("Robot address not discovered")
 
         # Create a client instance for the bot
         self.client = BleakClient(self.address)
@@ -128,10 +136,11 @@ class BleController:
             self.discoveredCharacs = self.svcs.characteristics
         except Exception as e:
             # Unable to connect so print the error
-            print("Bluetooth Error", e)
+            logger.error("Bluetooth Error")
+            logger.error(e)
             # Disconnect
             await self.disconnect()
-            return False
+            raise
 
         discoveredServiceUUIDs = [str(x.uuid) for x in self.svcs.services.values()]
         for service in reqServices:
@@ -139,10 +148,9 @@ class BleController:
                 service not in discoveredServiceUUIDs
                 and _long_to_short_uuid(service) not in discoveredServiceUUIDs
             ):
-                print("Service not found: " + service)
-                print("Connection failed - disconnecting")
+                logger.debug("Service not found: " + service)
                 await self.disconnect()
-                return False
+                raise Exception("Required BLE services not discovered")
         return True
 
     async def connectToRobot(self, botID):
@@ -171,12 +179,9 @@ class BleController:
                 HEARTBEAT_UUID, self.packetReceivedCallbackWrapper
             )
         except Exception as e:
-            print(
-                "Connection Incomplete",
-                e,
-                " Please try again, \
-                your robot might need updating",
-            )
+            logger.error("Connection Incomplete")
+            logger.error(e)
+            logger.error("Please try again, your robot might need updating")
             await self.disconnect()
             return False
 
@@ -186,8 +191,11 @@ class BleController:
         return True
 
     async def timeout(self, time, cb=None):
-        await asyncio.sleep(time)
-        await cb()
+        try:
+            await asyncio.sleep(time)
+            await cb()
+        except asyncio.CancelledError:
+            return
 
     async def heartbeat(self):
         if self.status != CONNECTION_STATUS.CONNECTED or not self.heartbeatRequired:
@@ -199,19 +207,25 @@ class BleController:
                 readVal = await asyncio.wait_for(
                     self.read(HEARTBEAT_UUID), timeout=HEARTBEAT_TIMEOUT
                 )
-                # print('heartbeat read succeeded: ', readVal[0])
+                # logger.debug('heartbeat read succeeded: ', readVal[0])
                 self.lastReadWriteTime = int(time.time())
             except Exception as e:
-                print("heartbeat read failed", e)
+                logger.debug("heartbeat read failed", e)
                 await self.disconnect()
                 return
-        asyncio.create_task(self.timeout(HEARTBEAT_INTERVAL, self.heartbeat))
+        self.heartbeatTask = asyncio.create_task(
+            self.timeout(HEARTBEAT_INTERVAL, self.heartbeat), name=HEARTBEAT_TASK_NAME
+        )
 
     async def disconnect(self, calledByUser=True):
         self.userDisconnected = calledByUser
+        if self.heartbeatTask:
+            self.heartbeatTask.cancel()
+            self.heartbeatTask = None
         self._updateConnectionStatus(CONNECTION_STATUS.DISCONNECTED)
-        await self.client.disconnect()
+        if self.client:
+            await self.client.disconnect()
 
     def _onDisconnected(self, client):
         self._updateConnectionStatus(CONNECTION_STATUS.DISCONNECTED)
-        print("BLE disconnected event")
+        logger.info("BLE disconnected event")

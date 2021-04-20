@@ -17,6 +17,8 @@ class MovingAverage:
         if self._historyCount < self._windowSize:
             endIndex = self._historyCount
         total = 0
+        if endIndex == 0:
+            return 0
         for i in range(endIndex):
             total += self._historyWindow[i]
         return total / endIndex

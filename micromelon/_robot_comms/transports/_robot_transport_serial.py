@@ -1,3 +1,4 @@
+import logging
 from ._robot_transport_base import RobotTransportBase
 from .._comms_constants import (
     MicromelonOpCode as OPCODE,
@@ -7,6 +8,9 @@ from .._comms_constants import (
 from ..._binary import bytesToIntArray
 import serial
 import threading
+from ..._mm_logging import getLogger
+
+logger = getLogger()
 
 
 class RobotTransportSerial(RobotTransportBase):
@@ -54,9 +58,9 @@ class RobotTransportSerial(RobotTransportBase):
             except Exception as e:
                 readException = e
             if readException or len(packet) == 0:
-                print("Connection closed")
+                logger.info("Connection closed")
                 # if readException:
-                #   print(readException)
+                #   logger.error(readException)
                 self._connectionStatusCallback(CONNECTION_STATUS.DISCONNECTED)
                 return
             self._packetReceivedCallback(packet)

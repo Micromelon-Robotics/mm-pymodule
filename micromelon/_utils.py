@@ -1,9 +1,6 @@
-from ._logger import Logger, RangeErrorCategory
+from ._mm_logging import RangeErrorCategory, warnRangeCategory
 from .helper_math import constrain
 from time import sleep
-
-_logger = Logger()
-
 
 MAX_SPEED = 30
 MAX_DISTANCE = 3276.7
@@ -35,7 +32,7 @@ def restrictSpeed(speed):
 
     if abs(speed) > MAX_SPEED:
         # raise Exception('Speed must be between -30 and 30. You gave ' + speed);
-        _logger.displayWarning(
+        warnRangeCategory(
             "Speed must be between -{0} and {0}. You gave {1}".format(MAX_SPEED, speed),
             RangeErrorCategory.SPEED,
         )
@@ -51,7 +48,7 @@ def restrictDistance(dist):
     if abs(dist) > MAX_DISTANCE:
         # raise Exception(
         #     `Distance must be between -${MAX_DISTANCE} and ${MAX_DISTANCE}. You gave ${dist}`);
-        _logger.displayWarning(
+        warnRangeCategory(
             "Distance must be between "
             + "-{0} and {0}. You gave {1}".format(MAX_DISTANCE, dist),
             RangeErrorCategory.DISTANCE,
@@ -68,7 +65,7 @@ def restrictTime(secs):
         raise Exception("Seconds can't be negative.  You gave {}".format(secs))
 
     if abs(secs) > 120:
-        _logger.displayWarning(
+        warnRangeCategory(
             "Command would take {} seconds.  Maximum is {}.".format(secs, MAX_TIME),
             RangeErrorCategory.SECONDS,
         )
@@ -92,7 +89,7 @@ def restrictServoDegrees(d):
         raise Exception("Degrees must be a number")
     d = round(d)
     if abs(d) > 90:
-        _logger.displayWarning(
+        warnRangeCategory(
             "Degrees must be between "
             + "-{0} and {0}. You gave {1}".format(MAX_SERVO_DEGREES, d),
             RangeErrorCategory.SERVO_DEGREES,

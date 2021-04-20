@@ -3,6 +3,7 @@ import queue
 from enum import Enum
 import asyncio
 import time
+from .._mm_logging import getLogger
 
 from ._thread_command import ThreadCommand
 from .uart import UartController
@@ -22,6 +23,8 @@ from .transports import (
     RobotTransportSerial,
     RobotTransportTCP,
 )
+
+logger = getLogger()
 
 
 class RobotCommunicatorThread(threading.Thread):
@@ -53,10 +56,10 @@ class RobotCommunicatorThread(threading.Thread):
         self.queueEvent(self._uart.processIncomingPacket, packet)
 
     def _buttonPressCallback(self, buttonCode):
-        print("Button pressed - code: " + str(buttonCode))
+        logger.info("Button pressed - code: " + str(buttonCode))
 
     def _sensorErrorMaskCallback(self, errorMask):
-        print("Sensor Error Mask received: " + str(errorMask))
+        logger.info("Sensor Error Mask received: " + str(errorMask))
 
     def _motorNotificationCallback(self, data=None):
         while not self._motorsNotificationWatchers.empty():
@@ -68,7 +71,7 @@ class RobotCommunicatorThread(threading.Thread):
             temp.set()
 
     def _batteryPercentageCallback(self, percentage):
-        print("Battery percentage update: " + str(percentage) + "%")
+        logger.info("Battery percentage update: " + str(percentage) + "%")
 
     def start(self):
         super().start()
@@ -149,8 +152,8 @@ class RobotCommunicatorThread(threading.Thread):
             intArrayToBytes([requestedInterval], 2, signed=False),
         )
         self.writeAttribute(OPTYPE.SPAM_MODE.value, [1])
-        print("Sensor spam activated")
-        print("Requested interval: " + str(requestedInterval))
+        logger.debug("Sensor spam activated")
+        logger.debug("Requested interval: " + str(requestedInterval))
         self._sensorSpamActive = True
 
     def _calcNewSpamInterval(self):

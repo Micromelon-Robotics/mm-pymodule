@@ -3,6 +3,7 @@ import time
 from bleak import BleakClient, BleakScanner
 from .._comms_constants import CONNECTION_STATUS
 from ..._mm_logging import getLogger
+import re
 
 logger = getLogger()
 
@@ -64,6 +65,12 @@ class BleController:
 
     def updateBotID(self, botID):
         self.botID = botID
+        if not re.search("^\d{1,4}$", str(botID)):
+            logger.warning(
+                "Micromelon Robot IDs should be a number between 0 and 8999 - searching for '"
+                + str(botID)
+                + "' anyway."
+            )
         self.deviceName = "Micromelon" + str(self.botID).zfill(4)
 
     # BLE IO

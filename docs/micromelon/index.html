@@ -801,27 +801,27 @@ rc.connectBLE(botID)</p></div>
         self._roverErrorMask = None
         try:
             self._roverSimInfo = self.readAttribute(OPTYPE.SIMULATOR_INFO)[0]
-            print(&#34;Rover siminfo: &#34; + str(self._roverSimInfo))
+            logger.debug(&#34;Rover siminfo: &#34; + str(self._roverSimInfo))
         except Exception as e:
             # couldn&#39;t read simulator info - assume not simulated
-            print(&#34;Rover siminfo read failed&#34;)
-            print(e)
+            logger.info(&#34;Rover siminfo read failed&#34;)
+            logger.info(e)
             self._roverSimInfo = 0
 
         try:
             self._roverCharge = self.readAttribute(OPTYPE.STATE_OF_CHARGE)[0]
-            print(&#34;Rover battery at &#34; + str(self._roverCharge) + &#34;%&#34;)
+            logger.info(&#34;Rover battery at &#34; + str(self._roverCharge) + &#34;%&#34;)
             self._roverErrorMask = bytesToIntArray(
                 self.readAttribute(OPTYPE.SENSOR_ERRORS), 2, False
             )[0]
             if self._roverErrorMask == 0:
-                print(&#34;No sensor errors detected&#34;)
+                logger.info(&#34;No sensor errors detected&#34;)
             else:
-                print(&#34;Sensor errors detected&#34;)
-                print(&#34;Error mask: &#34; + str(self._roverErrorMask))
+                logger.warning(&#34;Sensor errors detected&#34;)
+                logger.warning(&#34;Error mask: &#34; + str(self._roverErrorMask))
         except Exception as e:
-            print(&#34;Failed to read battery and error mask&#34;)
-            print(e)
+            logger.error(&#34;Failed to read battery and error mask&#34;)
+            logger.error(e)
 
     def connectSerial(self, port=&#34;/dev/ttyS0&#34;):
         &#34;&#34;&#34;
@@ -916,8 +916,8 @@ rc.connectBLE(botID)</p></div>
                     timeout,
                 )
         except Exception as e:
-            print(&#34;Not all robot stop commands completed&#34;)
-            print(e)
+            logger.debug(&#34;Not all robot stop commands completed&#34;)
+            logger.debug(e)
 
     def end(self):
         &#34;&#34;&#34;
@@ -1555,8 +1555,8 @@ turning sensor spam off, and taking it out of running mode.
                 timeout,
             )
     except Exception as e:
-        print(&#34;Not all robot stop commands completed&#34;)
-        print(e)</code></pre>
+        logger.debug(&#34;Not all robot stop commands completed&#34;)
+        logger.debug(e)</code></pre>
 </details>
 </dd>
 <dt id="micromelon.RoverController.writeAttribute"><code class="name flex">
@@ -1722,7 +1722,7 @@ TUNES.DOWN = 2</p></div>
 </article>
 <nav id="sidebar">
 <header>
-<img src="../mm-logo.png" alt="Micromelon Logo">
+<img src="https://micromelon-robotics.github.io/mm-pymodule/mm-logo.png" alt="Micromelon Logo">
 </header>
 <h1>Index</h1>
 <div class="toc">

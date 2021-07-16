@@ -349,9 +349,14 @@ class RoverController(metaclass=Singleton):
             data = [1]
         self.writePacket(OPCODE.WRITE, OPTYPE.CONTROL_MODE, data)
 
+_sigintAlreadyReceived = False
 
 def _sigint_handler(sig, frame):
+    global _sigintAlreadyReceived
+    if _sigintAlreadyReceived:
+      os._exit(0)
     logger.info("Received SIGINT... Stopping robot")
+    _sigintAlreadyReceived = True
     try:
         rc = RoverController()
         rc.stopRover()

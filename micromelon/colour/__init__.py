@@ -6,6 +6,7 @@ from ._colour import *
 
 __all__ = [
     "CS",
+    "COLOURS",
     "random",
     "randomHue",
     "rgb",

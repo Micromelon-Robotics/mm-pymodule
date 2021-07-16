@@ -24,6 +24,11 @@ def delay(seconds) -> None:
 def isNumber(x):
     return isinstance(x, (int, float))
 
+def mathModulo(n, mod):
+    return ((n % mod ) + mod ) % mod
+
+def mathModuloDistance(x, y, mod):
+    return min(mathModulo(x - y, mod), mathModulo(y - x, mod))
 
 # Speed should be in cm/s with a maximum of 30
 def restrictSpeed(speed):

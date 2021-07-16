@@ -21,6 +21,7 @@ from .helper_math import _math as Math
 from ._utils import delay
 
 CS = Colour.CS
+COLOURS = Colour.COLOURS
 NOTES = Sounds.NOTES
 TUNES = Sounds.TUNES
 
@@ -39,6 +40,7 @@ __all__ = [
     "LEDs",
     "Colour",
     "CS",
+    "COLOURS",
     "Servos",
     "I2C",
     "delay",

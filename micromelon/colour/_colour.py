@@ -1,14 +1,17 @@
 import math
-import random
+import random as _rand
 from enum import Enum
 
 from .._robot_comms import RoverController, MicromelonType as OPTYPE
 from .._binary import bytesToIntArray
+from ..helper_math import constrain, scale
+from .._utils import mathModuloDistance, isNumber
 
 _rc = RoverController()
 
 __all__ = [
     "CS",
+    "COLOURS",
     "random",
     "randomHue",
     "rgb",
@@ -46,6 +49,33 @@ class CS(Enum):
     BRIGHT = 4
     ALL = 5
 
+class COLOURS(Enum):
+    """
+    A collection of predefined colour names mapped to an RGB array
+    """
+
+    WHITE = [255, 255, 255]
+    GREY = [128, 128, 128]
+    BLACK = [0, 0, 0]
+    LAVENDER = [220, 190, 255]
+    MAGENTA = [240, 50, 230]
+    PURPLE = [163, 53, 232]
+    CYAN = [70, 240, 240]
+    BLUE = [0, 128, 255]
+    NAVY = [0, 0, 128]
+    MINT = [170, 255, 195]
+    GREEN = [0, 255, 0]
+    TEAL = [0, 128, 128]
+    LIME = [210, 245, 60]
+    YELLOW = [255, 255, 0]
+    OLIVE = [128, 128, 0]
+    APRICOT = [255, 215, 180]
+    ORANGE = [255, 128, 0]
+    BROWN = [170, 110, 40]
+    PINK = [250, 190, 212]
+    RED = [255, 0, 34]
+    MAROON = [128, 0, 0]
+
 
 def random():
     """
@@ -54,9 +84,9 @@ def random():
     Returns:
       Array of three integers between 0 and 255 in the form [r, g, b]
     """
-    r = random.randint(0, 255)
-    g = random.randint(0, 255)
-    b = random.randint(0, 255)
+    r = _rand.randint(0, 255)
+    g = _rand.randint(0, 255)
+    b = _rand.randint(0, 255)
     return [r, g, b]
 
 
@@ -67,7 +97,7 @@ def randomHue():
     Returns:
       Array of three integers between 0 and 255 in the form [r, g, b]
     """
-    return hsvToRgb(random.randint(0, 359), 1, 1)
+    return hsvToRgb(_rand.randint(0, 359), 1, 1)
 
 
 def rgb(r, g, b):
@@ -85,7 +115,9 @@ def rgb(r, g, b):
     Returns:
       Array of three integers between 0 and 255 in the form [r, g, b]
     """
-    return _checkRGB(r, g, b)
+    c = [r, g, b]
+    _checkRGB(c)
+    return c
 
 
 def pick(r, g, b):
@@ -156,13 +188,8 @@ def blend(c1, c2, ratio, isHSV=False):
         c1 = hsv(c1[0], c1[1], c1[2])
         c2 = hsv(c2[0], c2[1], c2[2])
 
-    checked = _checkRGB(c1[0], c1[1], c1[2])
-    if checked[0] == False:
-        return checked
-
-    checked = _checkRGB(c2[0], c2[1], c2[2])
-    if checked[0] == False:
-        return checked
+    _checkRGB(c1)
+    _checkRGB(c2)
 
     r = round(c1[0] * (1 - ratio) + c2[0] * ratio)
     g = round(c1[1] * (1 - ratio) + c2[1] * ratio)
@@ -231,85 +258,78 @@ def readSensor(option=CS.HUE, sensor=1):
     return reading[sensor]
 
 
-def sensorSees(option, sensor=None):
+def sensorSees(rgb, sensor=1, tolerance=20):
     """
-    Determines whether or not there is red, green, blue, or white
-    visible to the colour sensors
+    Determines whether or not the specified sensor sees the colour within the tolerance
 
     Args:
-      option (int): one of CS.RED, CS.GREEN, CS.BLUE, or CS.BRIGHT
-      sensor (int): 0, 1, 2, or None for left, middle, right, or combined sensor readings
-                    defaults to None - if two or more sensors see the colour then return true
+      rgb (array): [r, g, b] - An rgb colour in the form of an array [r, g, b] 
+                    with each value between 0 and 255 inclusive or a COLOURS enum element
+      sensor (int): 0, 1, or 2 for left, middle, right. Defaults to middle
+      tolerance (int): How close the colour needs to be to what the sensor detects.
+                    If the detected colour hue is within the tolerance and the saturations
+                    are within 0.65 then it will return true.
+                    For shades (saturation < 0.04 or brightness < 25) the brightness is compared
+                    and if they are within a scaled brightness range it will return true.
+                    Must be between 0 and 255
 
     Raises:
-      Exception for invalid option or sensor arguments
+      Exception for invalid arguments
       Exception if the colour sensor read fails
 
     Returns:
-      For RED, GREEN, and BLUE options it will return True if the specific option is
-        above a minimum (30) and the hue is within a range
-        >330 or <20 for RED, between 85 and 160 for GREEN, and between 190 and 63 for BLUE
-      For WHITE (CS.BRIGHT) - True if the sensor reads brightness above 130 and all the colours
-        read within 50 of the average colour reading
+      True if the colour matches what the sensor detects within the tolerance range.
+      False otherwise
     """
-    if isinstance(option, CS):
-        option = option.value
-    if sensor != None and (sensor < 0 or sensor > 2):
+    if sensor not in [0, 1, 2]:
         raise Exception("Argument for sensor must be 0, 1, or 2")
+    if isNumber(tolerance) and (tolerance < 0 or tolerance > 255):
+        raise Exception("Tolerance must be a number between 0 and 255")
+    if isinstance(rgb, COLOURS):
+        rgb = rgb.value
+    _checkRGB(rgb)
 
-    if option < 1 or option > 4:
-        raise Exception("Invalid sensorSees colour option")
-
-    def colourIs(readValue, option):
-        WHITE_DEVIATION_THRESHOLD = 50
-        BRIGHTNESS_THRESHOLD = 130
-        UPPER_BRIGHTNESS_THRESHOLD = 180
-        MINIMUM_COLOUR_VALUE = 30
-
-        h = readValue[CS.HUE.value]
-        r = readValue[CS.RED.value]
-        g = readValue[CS.GREEN.value]
-        b = readValue[CS.BLUE.value]
-        w = readValue[CS.BRIGHT.value]
-
-        if option == CS.BRIGHT.value:
-            average = (r + g + b) / 3
-            if w > BRIGHTNESS_THRESHOLD:
-                if (
-                    abs(r - average) < WHITE_DEVIATION_THRESHOLD
-                    and abs(g - average) < WHITE_DEVIATION_THRESHOLD
-                    and abs(b - average) < WHITE_DEVIATION_THRESHOLD
-                ):
-                    return True
+    def colourDetected(sensorRawReading, rgbColour, tolerance):
+        sh = sensorRawReading[CS.HUE.value]
+        sr = sensorRawReading[CS.RED.value]
+        sg = sensorRawReading[CS.GREEN.value]
+        sb = sensorRawReading[CS.BLUE.value]
+        sw = sensorRawReading[CS.BRIGHT.value]
+        hsvReading = rgbToHsv(sr, sg, sb)
+        sSat = hsvReading[1]
+        
+        cr = rgbColour[0]
+        cg = rgbColour[1]
+        cb = rgbColour[2]
+        hsvColour = rgbToHsv(cr, cg, cb)
+        ch = hsvColour[0]
+        cSat = hsvColour[1]
+        cBright = hsvColour[2] * 255
+        
+        # Need a bit more tolerance around white than black
+        rangeScaledWithBrightness = constrain(
+            tolerance * scale(cBright, 0, 255, 1.5, 3), 0, 255)
+            
+        if cBright < 25 or cSat < 0.04:
+            # Looking for a shade or close enough
+            brightnessMatch = abs(sw - cBright) < rangeScaledWithBrightness
+            saturationOrBrightnessLowEnough = sSat < 0.3 or sw < 32
+            return saturationOrBrightnessLowEnough and brightnessMatch
+        
+        # No useful brightness to see a colour
+        if sw <= 32:
             return False
-        if w > UPPER_BRIGHTNESS_THRESHOLD:
-            return False  # Too white to be a colour
-
-        if option == CS.RED.value:
-            # return (r > b and r > g and r > MINIMUM_COLOUR_VALUE)
-            return r > MINIMUM_COLOUR_VALUE and (h < 20 or h > 330)
-
-        if option == CS.GREEN.value:
-            # return (g > r and g > b and g > MINIMUM_COLOUR_VALUE)
-            return g > MINIMUM_COLOUR_VALUE and (h > 85 and h < 160)
-
-        if option == CS.BLUE.value:
-            # return (b > r and b > g and b > MINIMUM_COLOUR_VALUE)
-            return b > MINIMUM_COLOUR_VALUE and (h > 190 and h < 263)
-        return False
+        # No useful saturation to see a colour
+        if sSat < 0.04:
+            return False
+        
+        hueMatch = mathModuloDistance(ch, sh, 360) < tolerance
+        # Be very generous on saturation match
+        saturationMatch = abs(sSat - cSat) < 0.65
+        return hueMatch and saturationMatch
 
     reading = readAllSensors()
-    if sensor == None:
-        # voting majority wins
-        score = 0
-        if colourIs(reading[0], option):
-            score += 1
-        if colourIs(reading[1], option):
-            score += 1
-        if colourIs(reading[2], option):
-            score += 1
-        return score >= 2
-    return colourIs(reading[sensor], option)
+    return colourDetected(reading[sensor], rgb, tolerance)
 
 
 def rgbToHsv(r, g, b):
@@ -440,7 +460,8 @@ def _parseColourArg(c):
         if rgb:
             return rgb
     elif type(c) is list:
-        if len(c) == 3 and _checkRGB(c[0], c[1], c[2]):
+        if len(c) == 3:
+            _checkRGB(c)
             return c
             # return c.map(x => Math.min(Math.max(0, x), 255));
     return None
@@ -488,12 +509,16 @@ def _readRawColourFromRobot():
     return parsed
 
 
-def _checkRGB(r, g, b):
+def _checkRGB(rgb):
+    errorStr = "Invalid RGB colour: r, g, and b must all be included and be between 0 and 255"
+    if not rgb or len(rgb) != 3:
+        raise Exception(errorStr)
+    
+    r = rgb[0]
+    g = rgb[1]
+    b = rgb[2]
     if r < 0 or g < 0 or b < 0 or r > 255 or g > 255 or b > 255:
-        raise Exception(
-            "Invalid RGB colour: r, g, and b should all be between 0 and 255"
-        )
-    return [r, g, b]
+        raise Exception(errorStr)
 
 
 def _checkHSV(h, s, v):

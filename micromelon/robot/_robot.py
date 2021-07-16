@@ -95,7 +95,7 @@ def getImageCapture(width, height):
     Returns:
       A numpy array of the image in bgr colour format
     """
-    if not _rc.isInNetworkMode():
+    if not _rc._robotCommunicator.isInTcpMode():
         raise Exception("This operation is only valid over the network to a backpack")
 
     image = _rc.readAttribute(

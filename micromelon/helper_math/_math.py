@@ -118,7 +118,7 @@ def scale(x, xmin, xmax, newMin, newMax):
 
     Raises:
       Exception if any of the arguments aren't numbers
-      Excpetion if xmin equals xmax or newMin equals newMax
+      Exception if xmin equals xmax or newMin equals newMax
 
     Returns
       x scaled from the range xmin - xmax to the range newMin - newMax
@@ -131,36 +131,12 @@ def scale(x, xmin, xmax, newMin, newMax):
         or not _isNumber(newMax)
     ):
         raise Exception("All arguments to scale must be numbers")
-    invert = False
-    temp = None
-    if xmax < xmin and newMax < newMin:
-        temp = xmin
-        xmin = xmax
-        xmax = temp
-        temp = newMin
-        newMin = newMax
-        newMax = temp
-    elif xmax < xmin and newMin < newMax:
-        invert = True
-        temp = xmin
-        xmin = xmax
-        xmax = temp
-    elif xmin < xmax and newMax < newMin:
-        invert = True
-        temp = newMin
-        newMin = newMax
-        newMax = temp
-    elif xmin == xmax or newMin == newMax:
+    
+    if xmin == xmax or newMin == newMax:
         raise Exception("Min and max cannot be the same number in scale function")
-
+    
     scaled = (((x - xmin) / (xmax - xmin)) * (newMax - newMin)) + newMin
-    if invert:
-        scaled = newMax - (scaled - newMin)
-    if scaled > newMax:
-        return newMax
-    if scaled < newMin:
-        return newMin
-    return scaled
+    return constrain(scaled, newMin, newMax)
 
 
 def isPrime(n):

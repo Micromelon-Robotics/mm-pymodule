@@ -16,6 +16,7 @@ class BleControllerThread(threading.Thread):
     def __init__(self, packetReceivedCallback, connectionStatusCallback) -> None:
         super().__init__()
 
+        self.daemon = True
         self._packetReceivedCallback = packetReceivedCallback
         self._connectionStatusCallback = connectionStatusCallback
         self._commandQueue = None

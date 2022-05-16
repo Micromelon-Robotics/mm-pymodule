@@ -29,6 +29,7 @@ class RobotTransportSerial(RobotTransportBase):
         self._connection.flushInput()
         self._connection.flushOutput()
         self._readingThread = threading.Thread(target=self._readingRoutine, args=())
+        self._readingThread.setDaemon(True)
         self._readingThread.start()
         self._connectionStatusCallback(CONNECTION_STATUS.CONNECTED)
 

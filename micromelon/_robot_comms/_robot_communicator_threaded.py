@@ -31,6 +31,7 @@ class RobotCommunicatorThread(threading.Thread):
     def __init__(self) -> None:
         super().__init__()
 
+        self.daemon = True
         self._commandQueue = None
         self._eventQueue = None
         self._loop = None

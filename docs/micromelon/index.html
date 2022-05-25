@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>micromelon API documentation</title>
 <meta name="description" content="Python module for connecting to and interacting with the Micromelon Rover
 and simulated rovers in the Micromelon Robot Simulator …" />
@@ -55,6 +55,7 @@ from .helper_math import _math as Math
 from ._utils import delay
 
 CS = Colour.CS
+COLOURS = Colour.COLOURS
 NOTES = Sounds.NOTES
 TUNES = Sounds.TUNES
 
@@ -73,6 +74,7 @@ __all__ = [
     &#34;LEDs&#34;,
     &#34;Colour&#34;,
     &#34;CS&#34;,
+    &#34;COLOURS&#34;,
     &#34;Servos&#34;,
     &#34;I2C&#34;,
     &#34;delay&#34;,
@@ -147,7 +149,7 @@ Also helpful definitions for musical notes to their frequency and …</p></div>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="micromelon.delay"><code class="name flex">
-<span>def <span class="ident">delay</span></span>(<span>seconds) ‑> NoneType</span>
+<span>def <span class="ident">delay</span></span>(<span>seconds) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Alias to Python time.sleep(seconds)
@@ -182,6 +184,135 @@ Also helpful definitions for musical notes to their frequency and …</p></div>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
+<dt id="micromelon.COLOURS"><code class="flex name class">
+<span>class <span class="ident">COLOURS</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of predefined colour names mapped to an RGB array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class COLOURS(Enum):
+    &#34;&#34;&#34;
+    A collection of predefined colour names mapped to an RGB array
+    &#34;&#34;&#34;
+
+    WHITE = [255, 255, 255]
+    GREY = [128, 128, 128]
+    BLACK = [0, 0, 0]
+    LAVENDER = [220, 190, 255]
+    MAGENTA = [240, 50, 230]
+    PURPLE = [163, 53, 232]
+    CYAN = [70, 240, 240]
+    BLUE = [0, 128, 255]
+    NAVY = [0, 0, 128]
+    MINT = [170, 255, 195]
+    GREEN = [0, 255, 0]
+    TEAL = [0, 128, 128]
+    LIME = [210, 245, 60]
+    YELLOW = [255, 255, 0]
+    OLIVE = [128, 128, 0]
+    APRICOT = [255, 215, 180]
+    ORANGE = [255, 128, 0]
+    BROWN = [170, 110, 40]
+    PINK = [250, 190, 212]
+    RED = [255, 0, 34]
+    MAROON = [128, 0, 0]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.COLOURS.APRICOT"><code class="name">var <span class="ident">APRICOT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.BLACK"><code class="name">var <span class="ident">BLACK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.BLUE"><code class="name">var <span class="ident">BLUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.BROWN"><code class="name">var <span class="ident">BROWN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.CYAN"><code class="name">var <span class="ident">CYAN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.GREEN"><code class="name">var <span class="ident">GREEN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.GREY"><code class="name">var <span class="ident">GREY</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.LAVENDER"><code class="name">var <span class="ident">LAVENDER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.LIME"><code class="name">var <span class="ident">LIME</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.MAGENTA"><code class="name">var <span class="ident">MAGENTA</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.MAROON"><code class="name">var <span class="ident">MAROON</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.MINT"><code class="name">var <span class="ident">MINT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.NAVY"><code class="name">var <span class="ident">NAVY</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.OLIVE"><code class="name">var <span class="ident">OLIVE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.ORANGE"><code class="name">var <span class="ident">ORANGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.PINK"><code class="name">var <span class="ident">PINK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.PURPLE"><code class="name">var <span class="ident">PURPLE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.RED"><code class="name">var <span class="ident">RED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.TEAL"><code class="name">var <span class="ident">TEAL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.WHITE"><code class="name">var <span class="ident">WHITE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.COLOURS.YELLOW"><code class="name">var <span class="ident">YELLOW</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
 <dt id="micromelon.CS"><code class="flex name class">
 <span>class <span class="ident">CS</span></span>
 <span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
@@ -1181,7 +1312,7 @@ Note: You will need to disable serial console on the UART you choose to use for 
 </details>
 </dd>
 <dt id="micromelon.RoverController.disconnect"><code class="name flex">
-<span>def <span class="ident">disconnect</span></span>(<span>self) ‑> NoneType</span>
+<span>def <span class="ident">disconnect</span></span>(<span>self) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -1385,7 +1516,7 @@ Exception on comms failure.
 </details>
 </dd>
 <dt id="micromelon.RoverController.setDefaultCommunicationTimeout"><code class="name flex">
-<span>def <span class="ident">setDefaultCommunicationTimeout</span></span>(<span>self, newDefaultTimeout: float) ‑> NoneType</span>
+<span>def <span class="ident">setDefaultCommunicationTimeout</span></span>(<span>self, newDefaultTimeout: float) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>This default timeout (in seconds) is used as a fallback for any communication<br>
@@ -1422,7 +1553,7 @@ Set a longer timeout if you expect slow communcation.
 </details>
 </dd>
 <dt id="micromelon.RoverController.setRoverToUART"><code class="name flex">
-<span>def <span class="ident">setRoverToUART</span></span>(<span>self, uartMode: bool) ‑> NoneType</span>
+<span>def <span class="ident">setRoverToUART</span></span>(<span>self, uartMode: bool) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Sets the robot's UART control mode.<br>
@@ -1470,7 +1601,7 @@ Exception on comms failure.
 </details>
 </dd>
 <dt id="micromelon.RoverController.startRover"><code class="name flex">
-<span>def <span class="ident">startRover</span></span>(<span>self, overrideSensorSpamMode: bool = None) ‑> NoneType</span>
+<span>def <span class="ident">startRover</span></span>(<span>self, overrideSensorSpamMode: bool = None) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Start sequence depending on robot mode:
@@ -1753,6 +1884,32 @@ TUNES.DOWN = 2</p></div>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
+<h4><code><a title="micromelon.COLOURS" href="#micromelon.COLOURS">COLOURS</a></code></h4>
+<ul class="two-column">
+<li><code><a title="micromelon.COLOURS.APRICOT" href="#micromelon.COLOURS.APRICOT">APRICOT</a></code></li>
+<li><code><a title="micromelon.COLOURS.BLACK" href="#micromelon.COLOURS.BLACK">BLACK</a></code></li>
+<li><code><a title="micromelon.COLOURS.BLUE" href="#micromelon.COLOURS.BLUE">BLUE</a></code></li>
+<li><code><a title="micromelon.COLOURS.BROWN" href="#micromelon.COLOURS.BROWN">BROWN</a></code></li>
+<li><code><a title="micromelon.COLOURS.CYAN" href="#micromelon.COLOURS.CYAN">CYAN</a></code></li>
+<li><code><a title="micromelon.COLOURS.GREEN" href="#micromelon.COLOURS.GREEN">GREEN</a></code></li>
+<li><code><a title="micromelon.COLOURS.GREY" href="#micromelon.COLOURS.GREY">GREY</a></code></li>
+<li><code><a title="micromelon.COLOURS.LAVENDER" href="#micromelon.COLOURS.LAVENDER">LAVENDER</a></code></li>
+<li><code><a title="micromelon.COLOURS.LIME" href="#micromelon.COLOURS.LIME">LIME</a></code></li>
+<li><code><a title="micromelon.COLOURS.MAGENTA" href="#micromelon.COLOURS.MAGENTA">MAGENTA</a></code></li>
+<li><code><a title="micromelon.COLOURS.MAROON" href="#micromelon.COLOURS.MAROON">MAROON</a></code></li>
+<li><code><a title="micromelon.COLOURS.MINT" href="#micromelon.COLOURS.MINT">MINT</a></code></li>
+<li><code><a title="micromelon.COLOURS.NAVY" href="#micromelon.COLOURS.NAVY">NAVY</a></code></li>
+<li><code><a title="micromelon.COLOURS.OLIVE" href="#micromelon.COLOURS.OLIVE">OLIVE</a></code></li>
+<li><code><a title="micromelon.COLOURS.ORANGE" href="#micromelon.COLOURS.ORANGE">ORANGE</a></code></li>
+<li><code><a title="micromelon.COLOURS.PINK" href="#micromelon.COLOURS.PINK">PINK</a></code></li>
+<li><code><a title="micromelon.COLOURS.PURPLE" href="#micromelon.COLOURS.PURPLE">PURPLE</a></code></li>
+<li><code><a title="micromelon.COLOURS.RED" href="#micromelon.COLOURS.RED">RED</a></code></li>
+<li><code><a title="micromelon.COLOURS.TEAL" href="#micromelon.COLOURS.TEAL">TEAL</a></code></li>
+<li><code><a title="micromelon.COLOURS.WHITE" href="#micromelon.COLOURS.WHITE">WHITE</a></code></li>
+<li><code><a title="micromelon.COLOURS.YELLOW" href="#micromelon.COLOURS.YELLOW">YELLOW</a></code></li>
+</ul>
+</li>
+<li>
 <h4><code><a title="micromelon.CS" href="#micromelon.CS">CS</a></code></h4>
 <ul class="two-column">
 <li><code><a title="micromelon.CS.ALL" href="#micromelon.CS.ALL">ALL</a></code></li>
@@ -1911,7 +2068,7 @@ TUNES.DOWN = 2</p></div>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

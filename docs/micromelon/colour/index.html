@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>micromelon.colour API documentation</title>
 <meta name="description" content="Collection of functions for manipulating colour representations.
 Includes functions for reading from the robot&#39;s colour sensors." />
@@ -38,6 +38,7 @@ from ._colour import *
 
 __all__ = [
     &#34;CS&#34;,
+    &#34;COLOURS&#34;,
     &#34;random&#34;,
     &#34;randomHue&#34;,
     &#34;rgb&#34;,
@@ -118,13 +119,8 @@ Exception if the colours are not valid (0-255 for r, g, and b values, 0-360 for 
         c1 = hsv(c1[0], c1[1], c1[2])
         c2 = hsv(c2[0], c2[1], c2[2])
 
-    checked = _checkRGB(c1[0], c1[1], c1[2])
-    if checked[0] == False:
-        return checked
-
-    checked = _checkRGB(c2[0], c2[1], c2[2])
-    if checked[0] == False:
-        return checked
+    _checkRGB(c1)
+    _checkRGB(c2)
 
     r = round(c1[0] * (1 - ratio) + c2[0] * ratio)
     g = round(c1[1] * (1 - ratio) + c2[1] * ratio)
@@ -360,9 +356,9 @@ that is equivalent to the hsv(hue, 1, 1)</p></div>
     Returns:
       Array of three integers between 0 and 255 in the form [r, g, b]
     &#34;&#34;&#34;
-    r = random.randint(0, 255)
-    g = random.randint(0, 255)
-    b = random.randint(0, 255)
+    r = _rand.randint(0, 255)
+    g = _rand.randint(0, 255)
+    b = _rand.randint(0, 255)
     return [r, g, b]</code></pre>
 </details>
 </dd>
@@ -385,7 +381,7 @@ that is equivalent to the hsv(hue, 1, 1)</p></div>
     Returns:
       Array of three integers between 0 and 255 in the form [r, g, b]
     &#34;&#34;&#34;
-    return hsvToRgb(random.randint(0, 359), 1, 1)</code></pre>
+    return hsvToRgb(_rand.randint(0, 359), 1, 1)</code></pre>
 </details>
 </dd>
 <dt id="micromelon.colour.readAllSensors"><code class="name flex">
@@ -548,7 +544,9 @@ CS.ALL gives an array of all readings in the form [HUE, RED, GREEN, BLUE, BRIGHT
     Returns:
       Array of three integers between 0 and 255 in the form [r, g, b]
     &#34;&#34;&#34;
-    return _checkRGB(r, g, b)</code></pre>
+    c = [r, g, b]
+    _checkRGB(c)
+    return c</code></pre>
 </details>
 </dd>
 <dt id="micromelon.colour.rgbToHex"><code class="name flex">
@@ -635,118 +633,112 @@ hue between 0 and 360 inclusive, s and v between 0 and 1 inclusive</p></div>
 </details>
 </dd>
 <dt id="micromelon.colour.sensorSees"><code class="name flex">
-<span>def <span class="ident">sensorSees</span></span>(<span>option, sensor=None)</span>
+<span>def <span class="ident">sensorSees</span></span>(<span>rgb, sensor=1, tolerance=20)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Determines whether or not there is red, green, blue, or white<br>
-visible to the colour sensors
+<div class="desc"><p>Determines whether or not the specified sensor sees the colour within the tolerance
 </p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>option</code></strong> :&ensp;<code>int</code></dt>
-<dd>one of CS.RED, CS.GREEN, CS.BLUE, or CS.BRIGHT
+<dt><strong><code>rgb</code></strong> :&ensp;<code>array</code></dt>
+<dd>[r, g, b] - An rgb colour in the form of an array [r, g, b] <br>
+with each value between 0 and 255 inclusive or a COLOURS enum element
 </dd>
 <dt><strong><code>sensor</code></strong> :&ensp;<code>int</code></dt>
-<dd>0, 1, 2, or None for left, middle, right, or combined sensor readings<br>
-defaults to None - if two or more sensors see the colour then return true
+<dd>0, 1, or 2 for left, middle, right. Defaults to middle
+</dd>
+<dt><strong><code>tolerance</code></strong> :&ensp;<code>int</code></dt>
+<dd>How close the colour needs to be to what the sensor detects.<br>
+If the detected colour hue is within the tolerance and the saturations<br>
+are within 0.65 then it will return true.<br>
+For shades (saturation &lt; 0.04 or brightness &lt; 25) the brightness is compared<br>
+and if they are within a scaled brightness range it will return true.<br>
+Must be between 0 and 255
 </dd>
 </dl>
 <h2 id="raises">Raises</h2>
-<p>Exception for invalid option or sensor arguments<br>
+<p>Exception for invalid arguments<br>
 Exception if the colour sensor read fails
 </p>
 <h2 id="returns">Returns</h2>
-<p>For RED, GREEN, and BLUE options it will return True if the specific option is<br>
-above a minimum (30) and the hue is within a range
-</p>
-<blockquote>
-<p>330 or &lt;20 for RED, between 85 and 160 for GREEN, and between 190 and 63 for BLUE<br>
-For WHITE (CS.BRIGHT) - True if the sensor reads brightness above 130 and all the colours<br>
-read within 50 of the average colour reading</p>
-</blockquote></div>
+<p>True if the colour matches what the sensor detects within the tolerance range.<br>
+False otherwise</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def sensorSees(option, sensor=None):
+<pre><code class="python">def sensorSees(rgb, sensor=1, tolerance=20):
     &#34;&#34;&#34;
-    Determines whether or not there is red, green, blue, or white
-    visible to the colour sensors
+    Determines whether or not the specified sensor sees the colour within the tolerance
 
     Args:
-      option (int): one of CS.RED, CS.GREEN, CS.BLUE, or CS.BRIGHT
-      sensor (int): 0, 1, 2, or None for left, middle, right, or combined sensor readings
-                    defaults to None - if two or more sensors see the colour then return true
+      rgb (array): [r, g, b] - An rgb colour in the form of an array [r, g, b] 
+                    with each value between 0 and 255 inclusive or a COLOURS enum element
+      sensor (int): 0, 1, or 2 for left, middle, right. Defaults to middle
+      tolerance (int): How close the colour needs to be to what the sensor detects.
+                    If the detected colour hue is within the tolerance and the saturations
+                    are within 0.65 then it will return true.
+                    For shades (saturation &lt; 0.04 or brightness &lt; 25) the brightness is compared
+                    and if they are within a scaled brightness range it will return true.
+                    Must be between 0 and 255
 
     Raises:
-      Exception for invalid option or sensor arguments
+      Exception for invalid arguments
       Exception if the colour sensor read fails
 
     Returns:
-      For RED, GREEN, and BLUE options it will return True if the specific option is
-        above a minimum (30) and the hue is within a range
-        &gt;330 or &lt;20 for RED, between 85 and 160 for GREEN, and between 190 and 63 for BLUE
-      For WHITE (CS.BRIGHT) - True if the sensor reads brightness above 130 and all the colours
-        read within 50 of the average colour reading
+      True if the colour matches what the sensor detects within the tolerance range.
+      False otherwise
     &#34;&#34;&#34;
-    if isinstance(option, CS):
-        option = option.value
-    if sensor != None and (sensor &lt; 0 or sensor &gt; 2):
+    if sensor not in [0, 1, 2]:
         raise Exception(&#34;Argument for sensor must be 0, 1, or 2&#34;)
+    if isNumber(tolerance) and (tolerance &lt; 0 or tolerance &gt; 255):
+        raise Exception(&#34;Tolerance must be a number between 0 and 255&#34;)
+    if isinstance(rgb, COLOURS):
+        rgb = rgb.value
+    _checkRGB(rgb)
 
-    if option &lt; 1 or option &gt; 4:
-        raise Exception(&#34;Invalid sensorSees colour option&#34;)
-
-    def colourIs(readValue, option):
-        WHITE_DEVIATION_THRESHOLD = 50
-        BRIGHTNESS_THRESHOLD = 130
-        UPPER_BRIGHTNESS_THRESHOLD = 180
-        MINIMUM_COLOUR_VALUE = 30
-
-        h = readValue[CS.HUE.value]
-        r = readValue[CS.RED.value]
-        g = readValue[CS.GREEN.value]
-        b = readValue[CS.BLUE.value]
-        w = readValue[CS.BRIGHT.value]
-
-        if option == CS.BRIGHT.value:
-            average = (r + g + b) / 3
-            if w &gt; BRIGHTNESS_THRESHOLD:
-                if (
-                    abs(r - average) &lt; WHITE_DEVIATION_THRESHOLD
-                    and abs(g - average) &lt; WHITE_DEVIATION_THRESHOLD
-                    and abs(b - average) &lt; WHITE_DEVIATION_THRESHOLD
-                ):
-                    return True
+    def colourDetected(sensorRawReading, rgbColour, tolerance):
+        sh = sensorRawReading[CS.HUE.value]
+        sr = sensorRawReading[CS.RED.value]
+        sg = sensorRawReading[CS.GREEN.value]
+        sb = sensorRawReading[CS.BLUE.value]
+        sw = sensorRawReading[CS.BRIGHT.value]
+        hsvReading = rgbToHsv(sr, sg, sb)
+        sSat = hsvReading[1]
+        
+        cr = rgbColour[0]
+        cg = rgbColour[1]
+        cb = rgbColour[2]
+        hsvColour = rgbToHsv(cr, cg, cb)
+        ch = hsvColour[0]
+        cSat = hsvColour[1]
+        cBright = hsvColour[2] * 255
+        
+        # Need a bit more tolerance around white than black
+        rangeScaledWithBrightness = constrain(
+            tolerance * scale(cBright, 0, 255, 1.5, 3), 0, 255)
+            
+        if cBright &lt; 25 or cSat &lt; 0.04:
+            # Looking for a shade or close enough
+            brightnessMatch = abs(sw - cBright) &lt; rangeScaledWithBrightness
+            saturationOrBrightnessLowEnough = sSat &lt; 0.3 or sw &lt; 32
+            return saturationOrBrightnessLowEnough and brightnessMatch
+        
+        # No useful brightness to see a colour
+        if sw &lt;= 32:
             return False
-        if w &gt; UPPER_BRIGHTNESS_THRESHOLD:
-            return False  # Too white to be a colour
-
-        if option == CS.RED.value:
-            # return (r &gt; b and r &gt; g and r &gt; MINIMUM_COLOUR_VALUE)
-            return r &gt; MINIMUM_COLOUR_VALUE and (h &lt; 20 or h &gt; 330)
-
-        if option == CS.GREEN.value:
-            # return (g &gt; r and g &gt; b and g &gt; MINIMUM_COLOUR_VALUE)
-            return g &gt; MINIMUM_COLOUR_VALUE and (h &gt; 85 and h &lt; 160)
-
-        if option == CS.BLUE.value:
-            # return (b &gt; r and b &gt; g and b &gt; MINIMUM_COLOUR_VALUE)
-            return b &gt; MINIMUM_COLOUR_VALUE and (h &gt; 190 and h &lt; 263)
-        return False
+        # No useful saturation to see a colour
+        if sSat &lt; 0.04:
+            return False
+        
+        hueMatch = mathModuloDistance(ch, sh, 360) &lt; tolerance
+        # Be very generous on saturation match
+        saturationMatch = abs(sSat - cSat) &lt; 0.65
+        return hueMatch and saturationMatch
 
     reading = readAllSensors()
-    if sensor == None:
-        # voting majority wins
-        score = 0
-        if colourIs(reading[0], option):
-            score += 1
-        if colourIs(reading[1], option):
-            score += 1
-        if colourIs(reading[2], option):
-            score += 1
-        return score &gt;= 2
-    return colourIs(reading[sensor], option)</code></pre>
+    return colourDetected(reading[sensor], rgb, tolerance)</code></pre>
 </details>
 </dd>
 </dl>
@@ -754,6 +746,135 @@ read within 50 of the average colour reading</p>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
+<dt id="micromelon.colour.COLOURS"><code class="flex name class">
+<span>class <span class="ident">COLOURS</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A collection of predefined colour names mapped to an RGB array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class COLOURS(Enum):
+    &#34;&#34;&#34;
+    A collection of predefined colour names mapped to an RGB array
+    &#34;&#34;&#34;
+
+    WHITE = [255, 255, 255]
+    GREY = [128, 128, 128]
+    BLACK = [0, 0, 0]
+    LAVENDER = [220, 190, 255]
+    MAGENTA = [240, 50, 230]
+    PURPLE = [163, 53, 232]
+    CYAN = [70, 240, 240]
+    BLUE = [0, 128, 255]
+    NAVY = [0, 0, 128]
+    MINT = [170, 255, 195]
+    GREEN = [0, 255, 0]
+    TEAL = [0, 128, 128]
+    LIME = [210, 245, 60]
+    YELLOW = [255, 255, 0]
+    OLIVE = [128, 128, 0]
+    APRICOT = [255, 215, 180]
+    ORANGE = [255, 128, 0]
+    BROWN = [170, 110, 40]
+    PINK = [250, 190, 212]
+    RED = [255, 0, 34]
+    MAROON = [128, 0, 0]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="micromelon.colour.COLOURS.APRICOT"><code class="name">var <span class="ident">APRICOT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.BLACK"><code class="name">var <span class="ident">BLACK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.BLUE"><code class="name">var <span class="ident">BLUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.BROWN"><code class="name">var <span class="ident">BROWN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.CYAN"><code class="name">var <span class="ident">CYAN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.GREEN"><code class="name">var <span class="ident">GREEN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.GREY"><code class="name">var <span class="ident">GREY</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.LAVENDER"><code class="name">var <span class="ident">LAVENDER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.LIME"><code class="name">var <span class="ident">LIME</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.MAGENTA"><code class="name">var <span class="ident">MAGENTA</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.MAROON"><code class="name">var <span class="ident">MAROON</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.MINT"><code class="name">var <span class="ident">MINT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.NAVY"><code class="name">var <span class="ident">NAVY</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.OLIVE"><code class="name">var <span class="ident">OLIVE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.ORANGE"><code class="name">var <span class="ident">ORANGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.PINK"><code class="name">var <span class="ident">PINK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.PURPLE"><code class="name">var <span class="ident">PURPLE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.RED"><code class="name">var <span class="ident">RED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.TEAL"><code class="name">var <span class="ident">TEAL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.WHITE"><code class="name">var <span class="ident">WHITE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="micromelon.colour.COLOURS.YELLOW"><code class="name">var <span class="ident">YELLOW</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
 <dt id="micromelon.colour.CS"><code class="flex name class">
 <span>class <span class="ident">CS</span></span>
 <span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
@@ -862,6 +983,32 @@ CS.ALL = 5</p></div>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
+<h4><code><a title="micromelon.colour.COLOURS" href="#micromelon.colour.COLOURS">COLOURS</a></code></h4>
+<ul class="two-column">
+<li><code><a title="micromelon.colour.COLOURS.APRICOT" href="#micromelon.colour.COLOURS.APRICOT">APRICOT</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.BLACK" href="#micromelon.colour.COLOURS.BLACK">BLACK</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.BLUE" href="#micromelon.colour.COLOURS.BLUE">BLUE</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.BROWN" href="#micromelon.colour.COLOURS.BROWN">BROWN</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.CYAN" href="#micromelon.colour.COLOURS.CYAN">CYAN</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.GREEN" href="#micromelon.colour.COLOURS.GREEN">GREEN</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.GREY" href="#micromelon.colour.COLOURS.GREY">GREY</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.LAVENDER" href="#micromelon.colour.COLOURS.LAVENDER">LAVENDER</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.LIME" href="#micromelon.colour.COLOURS.LIME">LIME</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.MAGENTA" href="#micromelon.colour.COLOURS.MAGENTA">MAGENTA</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.MAROON" href="#micromelon.colour.COLOURS.MAROON">MAROON</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.MINT" href="#micromelon.colour.COLOURS.MINT">MINT</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.NAVY" href="#micromelon.colour.COLOURS.NAVY">NAVY</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.OLIVE" href="#micromelon.colour.COLOURS.OLIVE">OLIVE</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.ORANGE" href="#micromelon.colour.COLOURS.ORANGE">ORANGE</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.PINK" href="#micromelon.colour.COLOURS.PINK">PINK</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.PURPLE" href="#micromelon.colour.COLOURS.PURPLE">PURPLE</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.RED" href="#micromelon.colour.COLOURS.RED">RED</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.TEAL" href="#micromelon.colour.COLOURS.TEAL">TEAL</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.WHITE" href="#micromelon.colour.COLOURS.WHITE">WHITE</a></code></li>
+<li><code><a title="micromelon.colour.COLOURS.YELLOW" href="#micromelon.colour.COLOURS.YELLOW">YELLOW</a></code></li>
+</ul>
+</li>
+<li>
 <h4><code><a title="micromelon.colour.CS" href="#micromelon.colour.CS">CS</a></code></h4>
 <ul class="two-column">
 <li><code><a title="micromelon.colour.CS.ALL" href="#micromelon.colour.CS.ALL">ALL</a></code></li>
@@ -878,7 +1025,7 @@ CS.ALL = 5</p></div>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

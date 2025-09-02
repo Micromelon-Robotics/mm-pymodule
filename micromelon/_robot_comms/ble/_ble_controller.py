@@ -101,7 +101,7 @@ class BleController:
     async def _detectionCallback(self):
         while 1:
             await asyncio.sleep(0.1)
-            for dev in await self.scanner.get_discovered_devices():
+            for dev in self.scanner.discovered_devices:
                 if self.deviceName == None or self.deviceName == dev.name:
                     self.address = dev.address
                     logger.debug("Found with address: ", dev.address)
@@ -130,15 +130,14 @@ class BleController:
             raise Exception("Robot address not discovered")
 
         # Create a client instance for the bot
-        self.client = BleakClient(self.address)
-        self.client.set_disconnected_callback(self._onDisconnected)
+        self.client = BleakClient(self.address, disconnected_callback=self._onDisconnected)
         # Connect to the bot via the recorded address
         try:
             self._updateConnectionStatus(CONNECTION_STATUS.CONNECTING)
             await self.client.connect(timeout=CONNECT_TIMEOUT)
             self._updateConnectionStatus(CONNECTION_STATUS.INTERROGATING)
             # Record the available services
-            self.svcs = await self.client.get_services()
+            self.svcs = self.client.services
             # Record the avaiable characteristics
             self.discoveredCharacs = self.svcs.characteristics
         except Exception as e:

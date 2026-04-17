@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# IDE directories and files
+.idea/
+.vscode/
+
 # temp files
 *temp.py
 

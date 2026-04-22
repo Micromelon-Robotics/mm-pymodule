@@ -78,3 +78,29 @@ Uploading
 ```
 python -m twine upload dist/*
 ```
+
+## Testing with pyenv
+
+[pyenv](https://github.com/pyenv/pyenv) (Mac/Linux) and [pyenv-win](https://github.com/pyenv-win/pyenv-win) (Windows) allow you to install and switch between multiple Python versions.
+
+Restart your terminal after installation.
+VSCode on windows needs a full restart if you are using the embedded terminal.
+
+### Install a Python version and test
+
+```bash
+# List available versions
+pyenv install --list
+
+# Install a specific version
+pyenv install 3.14.0
+
+# Set the version for this directory
+pyenv local 3.14.0
+
+# Create a virtual environment and install
+python -m venv .venv
+source .venv/Scripts/activate  # Windows
+# source .venv/bin/activate     # Mac/Linux
+pip install .
+```

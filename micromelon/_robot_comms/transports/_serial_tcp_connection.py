@@ -96,9 +96,12 @@ class SerialTCPConnection:
         while len(result) == 0:
             try:
                 data = self._sock.recv(dataLen)
-                self._recvBuffer.extend(list(data))
             except socket.timeout as e:
                 return []
+            if not data:
+                # recv gives b"" once the other end has closed the connection
+                raise ConnectionError("The connection was closed")
+            self._recvBuffer.extend(list(data))
             result = self._getFromRecvBuffer(dataLen)
         return result
 
